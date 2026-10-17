@@ -1340,6 +1340,25 @@ function leafPattern(x,y,w,h,k,pr,it){
   else o+=Tx(x+w/2,y+h/2,"ตามแบบ",{size:9,fill:SOFT});
   return o;
 }
+/* ---- บาน Fix ด้านบน: วาดลายเดียวกับบานประตู (หรือชนิดที่เลือก) + ป้าย FIX ---- */
+function fixPatternProduct(it,pr){const m={battens:"ribFine",solid:"panel1",glass:"glassFull",louvre:"louvreFull"}[it.fixType];return m?{pat:m,group:0,code:""}:pr}
+function fixPanelSVG(it,d,k,X,Y,opt={}){
+  const tr=Number(it.transomH)||0;if(tr<=0||!d||d.leafOnly||isOpenOnly(it))return "";
+  const rail=Number(fitOf(it).transomRail)||0;const leg=it.jamb==="NONE"?0:d.leg;
+  const x=X(leg),w=(d.jW-2*leg)*k,yR=Y(d.bottom+d.leafH+rail),hR=rail*k,y=Y(d.bottom+d.leafH+rail+tr),h=tr*k;
+  let o="";
+  if(opt.plain){
+    o+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="var(--accent-soft)" fill-opacity=".55" stroke="currentColor" stroke-width=".8"/>`;
+    if(hR>0)o+=`<rect x="${x.toFixed(1)}" y="${yR.toFixed(1)}" width="${w.toFixed(1)}" height="${hR.toFixed(1)}" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width=".5"/>`;
+    const sz=Math.max(8,Math.min(12,h*.4));
+    return o+`<text x="${(x+w/2).toFixed(1)}" y="${(y+h/2+sz*.35).toFixed(1)}" font-size="${sz.toFixed(1)}" text-anchor="middle" font-weight="700" fill="currentColor">FIX</text>`;
+  }
+  if(hR>0)o+=`<rect x="${x.toFixed(1)}" y="${yR.toFixed(1)}" width="${w.toFixed(1)}" height="${hR.toFixed(1)}" fill="#e6dfd4" stroke="${INK}" stroke-width=".8"/>`;
+  o+=Rr(x,y,w,h,`stroke-width="1"`)+leafPattern(x,y,w,h,k,fixPatternProduct(it,prodBy(it.catalog)),it);
+  const sz=Math.max(7,Math.min(13,h*.32)),tw=sz*2.4;
+  o+=`<rect x="${(x+4).toFixed(1)}" y="${(y+h-sz-6).toFixed(1)}" width="${tw.toFixed(1)}" height="${(sz+4).toFixed(1)}" fill="#fff" opacity=".9"/>`+Tx(x+4+tw/2,y+h-5,"FIX",{size:sz,weight:700});
+  return o;
+}
 /* front elevation of one opening at origin (fx = x of liner-left, fy = floor y) ; mirror for BACK */
 function elevation(it,d,k,fx,fy,opt={}){
   const s=S.std;const pr=prodBy(it.catalog);let o="";
@@ -1365,6 +1384,7 @@ function elevation(it,d,k,fx,fy,opt={}){
       }
       if(isSlide(it)&&i===0)o+=Ln(lx+lw*.3,ly+lh*.5,lx+lw*.7,ly+lh*.5,`stroke="${SOFT}" marker-end="url(#arr)"`);
     }
+    o+=fixPanelSVG(it,d,k,X,Y);
   }
   if(d.th&&it.jamb!=="NONE")o+=`<rect x="${X(0).toFixed(1)}" y="${(fy-d.bottom*k).toFixed(1)}" width="${(d.jW*k).toFixed(1)}" height="${(d.bottom*k).toFixed(1)}" fill="#ddd" stroke="${INK}" stroke-width=".6"/>`;
   o+=Ln(X(-s.subSide)-30,fy,X(d.jW+s.subSide)+30,fy,`stroke-width="1"`);
@@ -1376,7 +1396,7 @@ function miniSVG(it){
   const k=Math.min(260/d.subW,330/d.subH);const W=d.subW*k+100,H=d.subH*k+70;const fx=60,fy=H-40;const s=S.std;
   const X=mm=>fx+(mm+s.subSide)*k;
   return `<svg viewBox="0 0 ${W.toFixed(0)} ${H.toFixed(0)}" role="img" aria-label="รูปด้าน ${esc(it.code)}"><defs><marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="${SOFT}"/></marker></defs>${elevation(it,d,k,fx,fy)}
-  ${dimH(X(-s.openGap/2),X(d.jW+s.openGap/2),fy+20,d.w+" ช่องว่าง")}${dimV(fy,fy-d.h*k,fx-28,d.h+" ช่องว่าง")}</svg>`;
+  ${dimH(X(-s.openGap/2),X(d.jW+s.openGap/2),fy+20,d.w+" ช่องว่าง")}${dimV(fy,fy-d.h*k,fx-28,d.h+" ช่องว่าง")}${Number(it.transomH)>0&&!d.leafOnly&&!isOpenOnly(it)?dimV(fy-(d.bottom+d.leafH+(Number(fitOf(it).transomRail)||0))*k,fy-(d.bottom+d.leafH+(Number(fitOf(it).transomRail)||0)+Number(it.transomH))*k,X(d.jW+s.subSide)+18,"Fix "+Number(it.transomH)):""}</svg>`;
 }
 
 /* ================= A3 shop drawing — R3 page-1 composition =================
@@ -1680,7 +1700,7 @@ function _renderDrawer(d){
       <p class="small muted" style="margin:4px 0 0"><span class="lg dash"></span> ตามแบบ <span class="lg solid"></span> วัดจริง <span class="lg red"></span> แบบเดิมก่อนปรับ · พื้นสีคือบานที่คำนวณได้</p></div>
      <div class="row" style="align-items:stretch;flex-wrap:nowrap"><div class="elev" id="elev" style="flex:1">${miniSVG(d)}</div>${prodImg(prodBy(d.catalog))?`<img src="${prodImg(prodBy(d.catalog))}" alt="${esc(d.catalog)}" style="width:28%;max-width:150px;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#fff">`:""}</div>
      <div>${pickBtn(d)}</div>
-     ${formulaBox(sd,d)}
+     ${formulaBox(sd,d)}${fixBox(d)}
      ${sd?`<div class="notice info small mono" id="dimInfo">${dimInfo(sd,d)}</div>`:""}
      ${iss.length?`<div class="notice small">${iss.map(esc).join("<br>")}</div>`:""}
      <div><span class="eyebrow">รูปหน้างาน (แสดงในแบบอนุมัติ)</span><div class="photo-box">${ph?`<img src="${esc(ph)}" alt="รูปหน้างาน ${esc(d.code)}">`:`<span class="small muted">ยังไม่มีรูป</span>`}</div>
@@ -2084,6 +2104,7 @@ function compareSVG(it){
     const jx=fx+(sd.w-sd.jW)/2*k;
     if(it.jamb!=="NONE")o+=`<rect x="${jx.toFixed(1)}" y="${(fy-(sd.jH+sd.fl)*k).toFixed(1)}" width="${(sd.jW*k).toFixed(1)}" height="${(sd.jH*k).toFixed(1)}" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width=".8"/>`;
     for(let i=0;i<sd.n;i++){const lx=jx+(sd.x0+i*sd.step)*k;o+=`<rect x="${lx.toFixed(1)}" y="${(fy-(sd.bottom+sd.leafH)*k).toFixed(1)}" width="${(sd.leafW*k).toFixed(1)}" height="${(sd.leafH*k).toFixed(1)}" fill="var(--accent-soft)" fill-opacity=".55" stroke="currentColor" stroke-width=".8"/>`}
+    o+=fixPanelSVG(it,sd,k,mm=>jx+mm*k,mm=>fy-mm*k,{plain:true});
   }
   if(mW&&mH)o+=R(mW,mH,`stroke="var(--accent)" stroke-width="2"`);
   const lab=(x,y,t,c,a="start")=>`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="11" font-family="IBM Plex Mono,monospace" fill="${c}" text-anchor="${a}">${esc(t)}</text>`;
@@ -2263,7 +2284,7 @@ function detailSVG(it){
   o+=Rr(X(0),Y(sd.h),sd.w*k,sd.h*k,`stroke-dasharray="5 4" stroke="${SOFT}"`);
   const jx=(sd.w-sd.jW)/2;o+=Rr(X(jx),Y(sd.jH+sd.fl),sd.jW*k,sd.jH*k,`stroke-width="1.4"`);
   const tr=Number(it.transomH)||0;
-  if(tr>0){const ty=sd.bottom+sd.leafH+f.transomRail;o+=Rr(X(jx+sd.leg),Y(ty+tr),(sd.jW-2*sd.leg)*k,tr*k)+Ln(X(jx+sd.leg),Y(ty),X(jx+sd.jW-sd.leg),Y(ty))}
+  if(tr>0)o+=fixPanelSVG(it,sd,k,mm=>X(jx+mm),Y);
   const pr=prodBy(it.catalog);
   for(let i=0;i<sd.n;i++){const lx=X(jx+sd.x0+i*sd.step),ly=Y(sd.bottom+sd.leafH),lw=sd.leafW*k,lh=sd.leafH*k;o+=Rr(lx,ly,lw,lh,`stroke-width="1.1"`)+leafPattern(lx,ly,lw,lh,k,pr,it);
     const hl=sd.n===1?hingeLeftFront(it):i<sd.n/2;if(!isSlide(it)&&!isFixed(it)){const hx=hl?lx:lx+lw,ox=hl?lx+lw:lx;o+=Ln(ox,ly,hx,ly+lh/2,`stroke-dasharray="6 4" stroke="${SOFT}"`)+Ln(ox,ly+lh,hx,ly+lh/2,`stroke-dasharray="6 4" stroke="${SOFT}"`);
@@ -3339,6 +3360,60 @@ function mountSettings(){
 }
 
 
+
+/* ================= บาน Fix ด้านบน (ใช้ช่อง transomH เดิม → สูตรบาน/วงกบ/ตัดไม้/แบบ A3 คำนวณต่อให้อัตโนมัติ) ================= */
+const FIX_TYPES={battens:"ไม้ระแนง (ตามแบบ)",solid:"ไม้ทึบ / ลูกฟัก",glass:"กระจก",louvre:"เกล็ด / ช่องลม"};
+function fixCalc(d){
+  const sd=shop(d);if(!sd||sd.leafOnly||isOpenOnly(d))return null;
+  const tr=Number(d.transomH)||0;const rail=Number(fitOf(d).transomRail)||0;
+  const base=shop(Object.assign({},d,{transomH:0}));const total=base?base.leafH:sd.leafH;
+  return {tr,rail,total,door:sd.leafH,w:Math.max(sd.jW-2*sd.leg,0),h:sd.h,dH:sd.dH,fl:sd.fl};
+}
+function fixOut(d){
+  if(!(Number(d.transomH)>0))return "";
+  const c=fixCalc(d);if(!c)return `<p class="small muted" style="margin:0">กรอกขนาดช่องเปิดก่อน ระบบจึงคำนวณบานประตูหลังหักบาน Fix ได้</p>`;
+  const warn=[];if(c.tr>0&&c.tr<100)warn.push("บาน Fix สูงน้อยกว่า 100 มม. ตรวจสอบกับแบบ");if(c.tr>0&&c.door<1800)warn.push(`บานประตูเหลือ ${f1(c.door)} มม. ต่ำกว่า 1,800 ตรวจสอบกับแบบ`);if(c.door<=0)warn.push("บาน Fix สูงเกินช่องเปิด");
+  const k=Math.min(150/Math.max(c.total,1),60/Math.max(c.w,1));const W=c.w*k,H=c.total*k,fh=c.tr*k,rh=c.rail*k;
+  const svg=`<svg viewBox="-4 -4 ${(W+120).toFixed(0)} ${(H+8).toFixed(0)}" style="width:150px;max-width:40%;flex:none" role="img" aria-label="สัดส่วนบาน Fix และบานประตู">
+   ${c.tr>0?`<rect x="0" y="0" width="${W.toFixed(1)}" height="${fh.toFixed(1)}" fill="var(--accent-soft)" stroke="currentColor" stroke-width="1"/><rect x="0" y="${fh.toFixed(1)}" width="${W.toFixed(1)}" height="${Math.max(rh,1).toFixed(1)}" fill="currentColor" opacity=".55"/>
+   <text x="${(W+6).toFixed(1)}" y="${(fh/2+4).toFixed(1)}" font-size="10" fill="currentColor">Fix ${c.tr}</text>`:""}
+   <rect x="0" y="${(fh+rh).toFixed(1)}" width="${W.toFixed(1)}" height="${Math.max(H-fh-rh,0).toFixed(1)}" fill="none" stroke="currentColor" stroke-width="1.2"/>
+   <text x="${(W+6).toFixed(1)}" y="${(fh+rh+(H-fh-rh)/2+4).toFixed(1)}" font-size="10" fill="currentColor">บาน ${f1(c.door)}</text></svg>`;
+  const lines=[`ช่องเปิดสูง ${f1(c.h)}${c.fl?` − พื้น ${c.fl}`:""} − หักระยะ ${c.dH} = ความสูงรวม <b>${f1(c.total)}</b>`,
+    c.tr>0?`${f1(c.total)} − บาน Fix ${c.tr} − คานแบ่ง ${c.rail} = บานประตู <b>${f1(c.door)}</b>`:`ยังไม่มีบาน Fix · บานประตูสูง <b>${f1(c.door)}</b>`,
+    c.tr>0?`บาน Fix กว้าง ${f1(c.w)} × สูง ${c.tr} มม. · ${d.fixType?esc(FIX_TYPES[d.fixType]||d.fixType):"ลายเดียวกับบานประตู"}`:""].filter(Boolean);
+  return `<div class="row" style="align-items:center;flex-wrap:nowrap;gap:12px">${svg}<div class="small mono" style="flex:1;min-width:0">${lines.join("<br>")}${warn.length?`<div class="small" style="color:var(--bad);margin-top:4px">${warn.map(esc).join("<br>")}</div>`:""}</div></div>`;
+}
+function fixBox(d){
+  if(isLeafOnly(d)||isOpenOnly(d))return "";
+  const f=fitOf(d);
+  const has=Number(d.transomH)>0;
+  return `<details class="notice small" id="fixBox" style="display:block" ${has?"open":""}><summary style="cursor:pointer"><b>บาน Fix ด้านบน</b> <span class="muted">· ${has?`Fix ${Number(d.transomH)} มม.`:"ไม่มี · แตะเพื่อเพิ่ม"}</span></summary>
+   <div class="fgrid" style="margin-top:8px">
+    <label class="f" for="fx-h">ความสูงบาน Fix (มม.)<input id="fx-h" type="number" inputmode="decimal" data-ed="transomH" value="${esc(d.transomH||"")}" placeholder="0 = ไม่มี"></label>
+    <label class="f" for="fx-rail">คานแบ่ง Fix / บาน (มม.)<input id="fx-rail" type="number" inputmode="decimal" data-fixrail value="${esc(f.transomRail)}"></label>
+    <label class="f" for="fx-door">หรือ กรอกความสูงบานประตูตามแบบ<input id="fx-door" type="number" inputmode="decimal" data-fixdoor placeholder="เช่น 2200 → คำนวณบาน Fix ให้"></label>
+    <label class="f" for="fx-type">ชนิดบาน Fix<select id="fx-type" data-ed="fixType"><option value="">ลายเดียวกับบานประตู</option>${Object.entries(FIX_TYPES).map(([k,t])=>`<option value="${k}" ${d.fixType===k?"selected":""}>${t}</option>`).join("")}</select></label>
+   </div><div id="fixOut" style="margin-top:8px">${fixOut(d)}</div></details>`;
+}
+function fixRefresh(){
+  const D=S.draft;if(!D)return;
+  const el=$("#elev");if(el)el.innerHTML=miniSVG(D);const cm=$("#cmp");if(cm)cm.innerHTML=compareSVG(D);
+  const fb=$("#formula");if(fb)fb.outerHTML=formulaBox(shop(D),D)||"<div id=formula></div>";
+  const di=$("#dimInfo");const sd=shop(D);if(di&&sd)di.textContent=dimInfo(sd,D);
+  const fo=$("#fixOut");if(fo)fo.innerHTML=fixOut(D);
+}
+document.addEventListener("input",e=>{
+  const t=e.target;if(!S.draft||!t.dataset)return;
+  if(t.dataset.fixdoor!=null){
+    const want=num(t.value);if(want==null){return}
+    const base=shop(Object.assign({},S.draft,{transomH:0}));if(!base)return;
+    const rail=Number(fitOf(S.draft).transomRail)||0;const tr=Math.max(Math.round((base.leafH-want-rail)*10)/10,0);
+    S.draft.transomH=tr;["#fx-h","#e-tr"].forEach(q=>{const x=$(q);if(x&&x!==t)x.value=tr||""});fixRefresh();return}
+  if(t.dataset.ed==="transomH"){const o=t.id==="fx-h"?$("#e-tr"):$("#fx-h");if(o)o.value=t.value;setTimeout(fixRefresh,0);return}
+  if(t.dataset.fixrail!=null){S.draft.frame=Object.assign({},S.draft.frame||{},{transomRail:num(t.value)??FIT_DEFAULT.transomRail});const o=$("#fr-transomRail");if(o)o.value=t.value;fixRefresh();return}
+  if(t.dataset.fr==="transomRail"){const o=$("#fx-rail");if(o)o.value=t.value;setTimeout(fixRefresh,0)}
+});
 /* ================= ClickUp: ส่งแบบอนุมัติ (ผ่าน Supabase Edge Function "clickup-approval") ================= */
 const cuHook=()=>{const c=window.CHAMPACA_SUPABASE_CONFIG||{};return String(c.clickupEndpoint||(String(c.url||"").replace(/\/$/,"")+"/functions/v1/clickup-approval"))};
 function cuNotice(p){
