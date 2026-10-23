@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Champaca Door Studio V3.6</title>
+<title>Champaca Door Studio V3.11</title>
 <style>
 /* Bundled Noto Sans Thai: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/thai)
 
@@ -635,6 +635,36 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outli
 .d3-finish-picker{display:block;margin-top:10px}.d3-finish-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}.d3-finish{min-width:0;padding:5px;border:2px solid transparent;border-radius:9px;background:#fff;color:#333;font:inherit;font-size:11px;cursor:pointer;text-align:center}.d3-finish[aria-pressed="true"]{border-color:#376c54;background:#edf5ef}.d3-finish:focus-visible{outline:3px solid #5995bb;outline-offset:2px}.d3-finish:disabled{opacity:.5;cursor:default}.d3-finish-swatch{display:block;aspect-ratio:1;border-radius:4px;margin-bottom:5px;background-repeat:no-repeat}.d3-options .d3-finish-picker small{display:block;line-height:1.5}
 
 .hf-panel{grid-column:1/-1;min-width:0;width:100%;box-sizing:border-box;scroll-margin:12px;margin:18px 0;padding:16px;border:1px solid #d5ded8;border-radius:18px;background:#fff}.hf-heading h3{font-size:18px;margin:5px 0}.hf-heading p{font-size:12px;color:#68766d}.hf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.hf-card{display:flex;flex-direction:column;align-items:stretch;text-align:left;padding:0;border:1px solid #dce2de;border-radius:12px;overflow:hidden;background:#fff;color:#243c31;cursor:pointer;min-width:0}.hf-card img{width:100%;height:auto;aspect-ratio:400/260;object-fit:contain;display:block;background:#f0f2f0}.hf-card-name{font-size:12px;font-weight:650;padding:9px 9px 2px;line-height:1.5}.hf-card small{padding:0 9px 8px;font-size:11px}.hf-card-action{font-size:11px;padding:7px 9px;background:#f0f5f1;margin-top:auto}.hf-card[aria-pressed="true"]{border:2px solid #367358}.hf-card[aria-pressed="true"] .hf-card-action{background:#e0f0e5;color:#175236}.hf-card:focus-visible,.hf-text-button:focus-visible{outline:3px solid #35765a;outline-offset:2px}.hf-detail{margin:16px 0;padding:14px;border-radius:12px;background:#f5f7f5;overflow-wrap:anywhere;font-size:12px}.hf-detail h4{font-size:14px;margin:6px 0}.hf-detail p{line-height:1.7}.hf-status{display:block;padding:8px;background:#fff4d8;border-radius:8px}.hf-status[data-status="blocked"]{background:#ffe4e1;color:#8f2a20}.hf-status[data-status="preliminary"]{background:#dff2e5;color:#19562e}.hf-facts{margin-top:16px}.hf-facts summary{cursor:pointer;margin-bottom:12px}.hf-facts .f{margin-top:10px}.hf-selected{font-size:12px;padding-top:8px}.hf-selected-row{display:flex;align-items:center;gap:6px;margin:8px 0}.hf-text-button{border:0;background:transparent;text-align:left;color:#28573e;flex:1;cursor:pointer;font:inherit;overflow-wrap:anywhere}.hf-empty{font-size:12px;padding:12px;background:#f3f6f3;border-radius:10px;color:#596d60}.hf-no-image{min-height:90px;padding:12px;font-size:12px}.hf-panel [data-hf-state]{font-size:11px;line-height:1.6}.hf-panel button:disabled{opacity:.55;cursor:wait}@media(min-width:821px){.d3-layout{grid-template-columns:minmax(0,1fr) 360px}}
+
+.drawing-review-evidence{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;min-width:220px}.drawing-evidence-button{padding:4px;border:1px solid #b5c5bb;border-radius:7px;background:var(--panel);color:var(--ink);font-size:10px;cursor:pointer}.drawing-evidence-button img{display:block;width:100%;height:90px;object-fit:contain;background:white}.drawing-evidence-button span{display:block;padding:4px}.drawing-evidence-button:disabled{opacity:.6;cursor:default}.drawing-material{display:flex;flex-direction:column;gap:3px;margin:8px 0;font-size:12px;max-width:300px;line-height:1.5}.drawing-material small{font-size:10px;white-space:normal}.drawing-evidence-modal{width:min(1000px,96vw)}.drawing-evidence-modal>img{display:block;width:100%;max-height:65vh;object-fit:contain;background:white}.sap-ref.drawing-dual-ref{flex-direction:column;gap:8px;padding:8px}.drawing-dual-ref>img{max-height:48%;width:100%;object-fit:contain}.drawing-schedule-ref{display:flex;flex-direction:column;align-items:center;min-height:0;flex:1;margin:0;width:100%}.drawing-schedule-ref img{width:100%;min-height:0;flex:1;object-fit:contain}.drawing-schedule-ref figcaption{font-size:10px;padding:3px}.drawing-doc-error{padding:50px;font-size:18px}.drawing-doc-error h2{color:#943726}
+
+/* V3.11: approval geometry always visible; references use a separate A3 sheet. */
+.sap-evidence-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(var(--evidence-cols),minmax(0,1fr));gap:16px;padding:12px 0}
+.sap-evidence-grid>figure{margin:0;border:1px solid #cfc9bf;min-width:0;min-height:0;display:flex;flex-direction:column;padding:10px;overflow:hidden}
+.sap-evidence-grid figcaption{font-size:12px;font-weight:600;margin-bottom:8px}
+.sap-evidence-image{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sap-evidence-image>img{max-width:100%;max-height:100%;object-fit:contain}
+.sap-evidence-grid .drawing-schedule-ref{flex:1;min-height:0}
+.sap-evidence-material{font-size:12px;margin-bottom:10px}
+
+
+/* V3.11: larger approval drawing and swapped model/opening panels. */
+.sap:not(.sap-evidence) .sap-grid{grid-template-columns:55% 26% 19%}
+.sap:not(.sap-evidence) .sap-grid>*{padding:14px 12px;min-width:0}
+.sap:not(.sap-evidence) .sap-notes{min-height:40px}
+.sap:not(.sap-evidence) .sap-c3{overflow-wrap:anywhere}
+.sap:not(.sap-evidence) .sap-pn{font-size:21px}
+.sap:not(.sap-evidence) .sap-meta span{width:72px}
+.sap:not(.sap-evidence) .sap-rev{gap:4px}
+.sap:not(.sap-evidence) .sap-tab td{padding:5px 6px!important}
+.sap:not(.sap-evidence) .sap-photo-dimensions{padding:8px 16px}
+.sap-evidence-image>svg{display:block;width:100%;height:100%;min-height:0}
+
+
+/* V3.11: larger product image with room for dimension annotations. */
+[data-approval-model] .model-photo-stage{padding:8px 22px 26px}
+[data-approval-model] .model-photo-dimensioned{height:100%;max-height:none;max-width:calc(100% - 28px)}
+[data-approval-model] .model-dimensions{gap:6px}
 
 </style>
 
@@ -5608,6 +5638,7 @@ function shopSVG(it,opt={}){
     o+=Tx(20,36,`แบบเสนออนุมัติ${noun} ${it.code||""} — ${JAMB[it.jamb]||""}`,{size:20,weight:600,anchor:"start"});
     o+=Tx(20,60,`ข้อมูลจาก${d.measured?"การวัดหน้างาน":"แบบลูกค้า"} · ผนังหนา ${depth} mm · บานหนา ${d.lt||"-"} mm · ${d.measured?"วัดหน้างานแล้ว":"ยังไม่มีขนาดวัดหน้างาน — รอยืนยัน"}`,{size:11,anchor:"start",fill:SOFT});
   }
+  if(C)o+=`<g data-approval-elevation>`;
   /* ---------- FRONT (large) ---------- */
   const fW=d.subW*k;const leftExt=30+d.w*k+30+(22+gp*nL),rightExt=(20+gp*nR)+40+sjd*k+56;const frontL0=(W-(leftExt+fW+rightExt))/2+leftExt;const fx=frontL0;
   const X=mm=>fx+(mm+s.subSide)*k,Y=mm=>fy-mm*k;const frontL=X(-s.subSide),frontR=X(d.jW+s.subSide);
@@ -5653,6 +5684,7 @@ function shopSVG(it,opt={}){
   if(!isOpenOnly(it)){o+=dimV(SY(d.bottom),SY(d.bottom+d.leafH),sx+sw+16,`${f1(d.leafH)}`,B);o+=Tx(sx-6,SY(d.bottom+d.leafH*.5),`บาน ${d.lt}`,{size:8.5,anchor:"end",fill:B})}
   if(ext)o+=Tx(sx+sw+26,fy+ext*k+14,`นอกต่ำกว่า ${ext}`,{size:8.5,anchor:"end",fill:B});
   o+=small(sx+sw/2,fy+capY,C?"SIDE":"SIDE — ตัดด้านข้าง",1);
+  if(C)o+=`</g><g data-approval-top>`;
   /* TOP — swing (small) */
   const tk=k2;const wlT=C?40:60;const tcx=X(d.jW/2);const tX=mm=>tcx+(mm-d.jW/2)*tk;
   const py=base+(outDown?0:d.leafW*tk);const wd=depth*tk,jw=Math.max(d.jambD*tk,2);const wl=C?40:60;
@@ -5674,6 +5706,7 @@ function shopSVG(it,opt={}){
   const single=d.n===1&&!isSlide(it)&&!isFold(it);
   o+=Tx(tcx,capT+30,`${sw2}${single?` • DIN ${it.handing==="R"?"RIGHT (R)":"LEFT (L)"}`:""} • ${d.n} บาน`,{size:C?9:10,fill:B});
   if(single)o+=Tx(tcx,capT+44,`บานพับ${hingeLeftT?"ซ้าย":"ขวา"}ในมุมมองนี้ · ดู DIN จากฝั่งที่เห็นบานพับ`,{size:C?8:9.5,fill:SOFT});
+  if(C)o+=`</g>`;
   return {svg:`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">${o}</svg>`,scale:`1 : ${sc} (ย่อ 1 : ${sc2})`};
 }
 /* ================= shell ================= */
@@ -5709,7 +5742,7 @@ function trainingOwned(x){return !!SB.user&&(x.user_id===SB.user.id||!x.user_id&
 function persistTrainingQueue(rows){localStorage.setItem('champaca_ai_training_examples',JSON.stringify(rows))}
 function trainingEvidence(row,staged=S.staged){
  const pg=staged?.pages?.[row.ref?.page];
- return {project_id:cur()?.id||null,project_version:cur()?.version||null,job_id:row.sourceJobId||staged?.jobId||null,job_ids:staged?.jobIds||[],source_file:pg?.sourceName||null,pdf_page:pg?.pageNumber||null,image_path:pg?.cloudPath||null,box:row.ref?.box||null,ref:row.ref||null,source_refs:row.sourceRefs||null,original_ai:row.aiOriginal||null,baseline:row.aiStaged||null};
+ return {project_id:cur()?.id||null,project_version:cur()?.version||null,job_id:row.sourceJobId||staged?.jobId||null,job_ids:staged?.jobIds||[],source_file:pg?.sourceName||null,pdf_page:pg?.pageNumber||null,image_path:pg?.cloudPath||null,box:row.ref?.box||null,ref:row.ref||null,source_refs:row.sourceRefs||null,material_spec:row.materialSpec||null,original_ai:row.aiOriginal||null,baseline:row.aiStaged||null};
 }
 function queueTrainingExample(row,staged=S.staged,source='human_review'){
  if(!SB.user)throw Error('กรุณาเข้าสู่ระบบก่อนบันทึกตัวอย่าง');
@@ -5762,7 +5795,7 @@ async function drawingKnowledgeStamp(){
 async function drawingCacheKey(payload,stamp){
  if(!stamp||!crypto.subtle)return null;
  const cfg=window.CHAMPACA_SUPABASE_CONFIG||{};
- const raw=JSON.stringify({user:SB.user?.id,endpoint:cfg.aiEndpoint||cfg.url,version:'3.3.0',server:S.aiServerVersion||'',payload,stamp});
+ const raw=JSON.stringify({user:SB.user?.id,endpoint:cfg.aiEndpoint||cfg.url,version:'3.7.0',server:S.aiServerVersion||'',payload,stamp});
  return [...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw)))].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 async function cachedDrawingCall(payload,signal){
@@ -5822,7 +5855,7 @@ function stagedView(){
   <div class="tbl-wrap"><table><thead><tr><th></th><th>รหัส</th><th>ตำแหน่ง</th><th>ชั้น</th><th>ประเภท</th><th class="num">บาน</th><th class="num">ชุด</th><th class="num">W</th><th class="num">H</th><th>ลาย/หมายเหตุ</th><th>ความมั่นใจ AI (%)</th></tr></thead><tbody>
   ${st.items.map((r,i)=>`<tr><td><input type="checkbox" data-stg-on="${i}" ${r.on?"checked":""} aria-label="เลือก ${esc(r.code)}"></td>
    <td><input class="inp mono" style="width:70px" data-stg="${i}" data-k="code" value="${esc(r.code)}"></td>
-   <td><input class="inp" style="width:150px" data-stg="${i}" data-k="location" value="${esc(r.location)}"></td>
+   <td><input class="inp" style="width:150px" data-stg="${i}" data-k="location" value="${esc(r.location)}">${reviewEvidenceHTML(r,i)}</td>
    <td><input class="inp" style="width:70px" data-stg="${i}" data-k="storey" value="${esc(r.storey)}"></td>
    <td><select class="inp" data-stg="${i}" data-k="type">${TYPES.map(o=>`<option ${o===r.type?"selected":""}>${o}</option>`).join("")}</select></td>
    <td class="num"><input class="inp mono" style="width:48px" data-stg="${i}" data-k="leaves" value="${esc(r.leaves??"")}"></td>
@@ -5912,7 +5945,7 @@ async function loadCloudAsset(ref){
   return url;
  })();try{return await S.cloudAssetLoading[ref]}finally{delete S.cloudAssetLoading[ref]}
 }
-async function preloadProjectImages(p){const refs=[...new Set((p.items||[]).flatMap(it=>[...(it.photos||[]),it.photo,it.ref]).filter(r=>assetRefPath(r)))];await Promise.all(refs.map(loadCloudAsset))}
+async function preloadProjectImages(p){const refs=[...new Set((p.items||[]).flatMap(it=>[...(it.photos||[]),it.photo,it.ref,it.scheduleImage]).filter(r=>assetRefPath(r)))];await Promise.all(refs.map(loadCloudAsset))}
 let drawingDbPromise;
 function drawingDb(){
  if(!window.indexedDB)return Promise.reject(new Error("เบราว์เซอร์ไม่รองรับการเก็บภาพแบบ"));
@@ -6091,8 +6124,51 @@ function openingFromDrawingSize(r,basis,w,h){
   if(basis==="frame")return {w:Math.round(w+s.openGap),h:Math.round(h+s.jambTopGap*(hasTh(it)?2:1))};
   return {w,h};
 }
+/* V3.11: evidence-linked materials. Never infer aluminium from glazing/swing alone. */
+function drawingPageClass(text){
+ const t=String(text||''),fields=['FRAME','PANEL','ELEMENT','HINGE','HANDLE','FITTING','LOCK'].filter(k=>new RegExp('\\b'+k+'\\b','i').test(t)).length;
+ const schedule=/DOOR\s*(?:&|AND|\/)?\s*(?:WINDOW)?\s*SCHEDULE|ตารางประตู|ตารางหน้าต่าง|ตารางช่องเปิด/i.test(t)||fields>=3||/DETAIL\s*(?:DOOR|WINDOW)|DETAIL\s+DOOR\s*&\s*WINDOW/i.test(t)&&fields>=2;
+ return {is_plan:!schedule&&/FURNITURE\s+LAYOUT\s+PLAN|FLOOR\s+PLAN|แปลน/i.test(t),is_schedule:schedule};
+}
+function drawingRefValid(ref){return !!(ref&&Number.isInteger(ref.page)&&ref.page>=0&&Array.isArray(ref.box)&&ref.box.length===4&&ref.box.every(x=>Number.isFinite(x)&&x>=0&&x<=1)&&ref.box[2]>ref.box[0]&&ref.box[3]>ref.box[1])}
+function drawingMaterialSpec(raw){
+ const x=raw.material_spec||raw.materialSpec||{},frame=String(x.frame||''),panel=String(x.panel||''),quote=String(x.frame_quote||'')+' '+String(x.panel_quote||''),sourceCode=String(x.source_code||'');
+ const same=!!sourceCode&&drawingTagKey(sourceCode)===drawingTagKey(raw.code),reference=drawingRefValid(x.schedule_ref)?x.schedule_ref:null;
+ const anchored=same&&reference&&!!quote.trim(),text=frame+' '+panel+' '+quote;
+ const wood=/\b(?:SOLID\s+TEAK|TEAK|TIMBER|WOOD(?:EN)?|BLOCK\s*BOARD|PLYWOOD)\b|ไม้สัก|ไม้จริง|ไม้อัด|บล็อคบอร์ด|บล็อกบอร์ด/i.test(text),alu=/ALUMINI?UM|ALUMINUM|อะลูมิเนียม|อลูมิเนียม|อลูมินัม/i.test(text);
+ const conflict=x.status==='conflict'||!!sourceCode&&!same;
+ return {frame,panel,frame_quote:String(x.frame_quote||''),panel_quote:String(x.panel_quote||''),source_code:sourceCode,schedule_ref:reference,status:conflict?'conflict':anchored&&x.status==='matched'?'matched':'unmatched',category:anchored&&x.status==='matched'&&!conflict?(alu&&wood?'mixed':alu?'aluminium':wood?'wood':'unknown'):'unknown',notes:String(x.notes||''),legacy:!Object.keys(x).length};
+}
+function drawingMaterialLabel(spec){const s=spec||{};return (s.frame||s.panel)?`วงกบ: ${s.frame||'รอยืนยัน'} · บาน: ${s.panel||'รอยืนยัน'}`:'วัสดุรอยืนยัน — ยังไม่มีหลักฐาน Schedule ที่จับคู่รหัส'}
+function drawingMaterialBadge(spec){return ({wood:'ไม้',aluminium:'อะลูมิเนียม',mixed:'วัสดุผสม',unknown:'รอยืนยันวัสดุ'})[spec?.category]||'รอยืนยันวัสดุ'}
+function drawingMaterialHTML(it){const s=it.materialSpec||drawingMaterialSpec(it);return `<div class="drawing-material"><b>${esc(drawingMaterialBadge(s))}</b><small>${esc(drawingMaterialLabel(s))}</small><small>${s.status==='matched'?`จับคู่ ${esc(s.source_code)} จาก Door Schedule`:s.status==='conflict'?'⚠ รหัสหรือหลักฐานขัดกัน — ต้องตรวจ':'ยังไม่มีหลักฐานที่จับคู่รหัสได้ · ไม่เดาวัสดุจากรูปทรง'}${s.legacy&&it.material?' · ผลอ่านเดิม: '+esc(it.material):''}</small></div>`}
+function reviewEvidenceHTML(r,i){return `<div class="drawing-review-evidence">${[['plan','แปลน / ตำแหน่ง'],['schedule','Door Schedule']].map(([kind,label])=>{const src=r['_preview_'+kind];return `<button type="button" class="drawing-evidence-button" data-review-evidence="${i}" data-evidence-kind="${kind}" ${src?'':'disabled'}>${src?`<img src="${src}" alt="${label} ${esc(r.code)}">`:''}<span>${label}${src?' ↗':' · ยังไม่มีภาพ'}</span></button>`}).join('')}</div>${drawingMaterialHTML(r)}`}
+async function prepareReviewEvidence(st){
+ for(const r of st.items){for(const [kind,ref] of [['plan',r.ref],['schedule',r.materialSpec?.schedule_ref]]){
+  const pg=st.pages?.[ref?.page];if(!pg?.url||!drawingRefValid(ref))continue;
+  try{const [x,y,x1,y1]=ref.box,blob=await cropBlob(pg.url,{x,y,w:x1-x,h:y1-y});if(S.staged!==st)return;r['_preview_'+kind]=URL.createObjectURL(blob)}catch{r['_preview_'+kind]=null}
+ }}if(S.staged===st)render();
+}
+function openReviewEvidence(index,kind){const r=S.staged?.items[index],src=r?.['_preview_'+kind];if(!src)return;$('#modalHost').innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-label="หลักฐานแบบ ${esc(r.code)}"><div class="scrim" data-close-evidence></div><div class="box drawing-evidence-modal"><div class="row"><h3>${esc(r.code)} · ${kind==='plan'?'แปลน / ตำแหน่ง':'Door Schedule'}</h3><button type="button" class="btn" data-close-evidence>ปิด ✕</button></div>${drawingMaterialHTML(r)}<img src="${src}" alt="หลักฐาน ${esc(r.code)}"><p class="small">อ่านวัสดุจาก Schedule ของรหัสเดียวกัน ภาพแปลนใช้ระบุตำแหน่ง ไม่ใช้เส้นวงเปิดหรือสีเส้นตัดสินวัสดุ</p></div></div>`}
+function drawingSourceRecord(ref,pages){const pg=pages?.[ref?.page];return pg&&drawingRefValid(ref)?{object_path:pg.cloudPath||null,source_name:pg.sourceName||null,pdf_page:pg.pageNumber||null,box:ref.box}:null}
+function savedScheduleHTML(it){return it.scheduleImage?`<figure class="drawing-schedule-ref"><figcaption>Door Schedule · ${esc(it.materialSpec?.source_code||it.code)}</figcaption><img src="${esc(photoSrc(it.scheduleImage))}" alt="Schedule ${esc(it.code)}"></figure>`:`<p class="small muted">ยังไม่มีภาพ Schedule ที่ผูกกับรหัสนี้</p>`}
+function docsReadyProject(p){if(!p)return p;p.tb={model:'Door',series:'-',drawingBy:'',checkBy:'',approveBy:'',production:'',...(p.tb||{})};for(const k of ['items','revisions','versions','changeLog'])if(!Array.isArray(p[k]))p[k]=[];p.version=Number(p.version)||1;return p}
+function docsEmpty(p){return head('แบบและการอนุมัติ','ยังไม่มีรายการในโครงการ')+`<section class="card" data-docs-empty><h2>${esc(p.name||'โครงการ')}</h2><p>ผล AI ต้องตรวจแล้วกด “นำเข้าโครงการ” ก่อน จึงจะสร้างแบบและลงนามอนุมัติได้</p>${S.staged?`<p>มีผล AI รอตรวจ ${S.staged.items.length} รายการ · เลือกไว้ ${S.staged.items.filter(r=>r.on).length} รายการ</p><button class="btn primary" data-go="intake">กลับไปตรวจและนำเข้าผล AI</button>`:`<p>ยังไม่มีผลตรวจทานในหน้าจอนี้ เลือกหน้าจากแบบแล้วอ่านใหม่ ผลที่ยังไม่ได้กดนำเข้าจะไม่กลายเป็นรายการอนุมัติอัตโนมัติ</p><button class="btn primary" data-go="intake">ไปหน้าข้อมูลแบบ / อ่าน AI</button>`}</section>`}
+function docsItemSafe(fn,p,it,idx,total,opt){try{return fn(p,it,idx,total,opt)}catch(e){console.warn('document item',it.code,e.message);return `<div class="a3 drawing-doc-error"><h2>${esc(it.code||'รายการไม่ระบุรหัส')}</h2><p>รายการนี้ยังสร้างแบบไม่ได้ กรุณาตรวจข้อมูลรายการ</p><p>${esc(e.message||e)}</p><p>รายการอื่นยังแสดงได้ · ยังไม่ถือว่าแบบครบสำหรับอนุมัติ</p></div>`}}
+const V37_MATERIAL_PROMPT=`\n\nกติกาจับคู่วัสดุและหลักฐาน:
+- อ่านรหัสที่วงไว้ในแปลน เช่น D-05 แล้วหารหัสเดียวกันใน Door Schedule โดยถือ D-05/D05/D5 เป็นรหัสเดียวกัน แต่ D-04 กับ D-09 คนละรหัส ห้ามยืมสเปกข้ามรหัส
+- FRAME คือวงกบ PANEL/LEAF คือบาน เก็บแยกใน material_spec.frame และ panel พร้อมข้อความที่เห็นจริง frame_quote และ panel_quote
+- SOLID TEAK = ไม้สักจริง; BLOCK BOARD COVERED WITH TEAK SOLID = บล็อกบอร์ดปิดไม้สัก; ALUMINIUM = อะลูมิเนียม; LAMINATED CLEAR GLASS = กระจกลามิเนต ห้ามเปลี่ยนบานกระจกเป็นไม้เพียงเพราะวงกบไม้ และห้ามบอกว่าอะลูมิเนียมจากเส้นสวิงหรือสีเส้น
+- ref คือกรอบตำแหน่งจริงในแปลน ขยายให้เห็นรหัสประตูและช่องเปิด ไม่ใช่ทั้งห้อง; material_spec.schedule_ref เป็นกรอบแยกในหน้า Schedule ต้องเห็นรหัสและตาราง FRAME/PANEL รวมกัน ใช้ page index ตามภาพที่ส่ง
+- ถ้าเห็นใน DETAIL VIEW ให้ใช้ detail_id ของภาพนั้นใน ref และ schedule_ref ระบบจะแปลงพิกัดกลับหน้าเต็ม
+- material_spec.source_code ต้องเป็นรหัสที่อ่านได้บน Schedule; ไม่พบรหัสตรงกัน status=unmatched category=unknown ไม่เดาวัสดุ ถ้าข้อมูลขัดกัน status=conflict และเขียนเหตุผล ห้ามใช้คู่มือผลิตภัณฑ์ตัวอย่างแทน Schedule โครงการ
+- material เป็นสรุปสั้นที่แยกวงกบและบาน ห้ามรวมทุกอย่างเป็นไม้ตามธุรกิจ Champaca เมื่อข้อมูลเป็นอลูมิเนียมให้บอกตรงตามแบบ
+- ถ้าหน้าหลักเป็น Schedule ไม่ใช่แปลน ให้ใช้เป็นหลักฐานสเปก ไม่สร้างจำนวนช่องเปิดจากจำนวนรูปด้าน และไม่ถือข้อความ LOCATION: FLOOR PLAN ว่าเป็นหน้าแปลน
+`;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-review-evidence]');if(b){openReviewEvidence(Number(b.dataset.reviewEvidence),b.dataset.evidenceKind);return}if(e.target.closest('[data-close-evidence]'))$('#modalHost').innerHTML=''});
+
 function prepareDrawingEvidence(raw){
-  const r={...raw,_source:raw};const originalType=r.type||"";r.type=drawingTypeValue(originalType,r.kind);
+  const r={...raw,_source:raw};r.materialSpec=drawingMaterialSpec(raw);if(r.materialSpec.status==='matched')r.material=drawingMaterialLabel(r.materialSpec);else if(!r.materialSpec.legacy)r.material='';const originalType=r.type||"";r.type=drawingTypeValue(originalType,r.kind);
   r.qty=Number.isInteger(Number(r.qty))&&Number(r.qty)>0?Number(r.qty):null;
   r.leaves=Number.isInteger(Number(r.leaves))&&Number(r.leaves)>0?Number(r.leaves):null;
   const notes=[r.notes];
@@ -6130,7 +6206,7 @@ const TAG_NEAR_RADIUS=.02,TAG_NEAR_MAX=4,SCHEDULE_LINE_MAX=250,SCHEDULE_CHAR_MAX
 function pdfDrawingEvidence(textContent,viewport){
   const spans=(textContent.items||[]).filter(x=>typeof x.str==="string");
   const combined=spans.map(x=>x.str).join(" ");
-  const isPlan=/FURNITURE\s+LAYOUT\s+PLAN|FLOOR\s+PLAN|แปลน/i.test(combined);
+  const pageClass=drawingPageClass(combined),isPlan=pageClass.is_plan;
   const W=viewport.width,H=viewport.height,tags=[],tagCenters=[],captions=[],placed=[];let tagPart=-1;
   for(let i=0;i<spans.length;i++){
     const item=spans[i];let text=item.str.trim();
@@ -6155,8 +6231,8 @@ function pdfDrawingEvidence(textContent,viewport){
     const t=tags[k],[cx,cy]=tagCenters[k];
     t.near=dims.map(s=>({text:s.text,d:Math.hypot(s.cx-cx,s.cy-cy)})).filter(s=>s.d<=R).sort((a,b)=>a.d-b.d).slice(0,TAG_NEAR_MAX).map(s=>s.text);
   }
-  const isSchedule=!isPlan&&/SCHEDULE|ตารางประตู|ตารางหน้าต่าง|ตารางช่องเปิด/i.test(combined);
-  return {version:1,tagSet:4,is_plan:isPlan,is_schedule:isSchedule,tags:tags.slice(0,300),captions:captions.slice(0,100),...(isPlan?{}:scheduleTextLines(placed,W,H))};
+  const isSchedule=pageClass.is_schedule;
+  return {version:1,tagSet:5,is_plan:isPlan,is_schedule:isSchedule,tags:tags.slice(0,300),captions:captions.slice(0,100),...(isPlan?{}:scheduleTextLines(placed,W,H))};
 }
 // Schedule, elevation and legend pages: the text layer as lines in reading order, each span prefixed with its position
 // along the reading direction (0–1), so the model can line up columns whether the schedule is a table or a row of door elevations.
@@ -6194,7 +6270,7 @@ async function collectDrawingPDFEvidence(p,pages,signal){
   p.drawingTextEvidence=p.drawingTextEvidence||{};const groups=new Map();let changed=false,warnings=[];
   const originals=(p.drawingUploads||[]).flatMap(u=>u.originals||[]);
   for(const pg of pages){
-    if(!pg.cloudPath||p.drawingTextEvidence[pg.cloudPath]?.version===1&&p.drawingTextEvidence[pg.cloudPath].tagSet===4)continue;
+    if(!pg.cloudPath||p.drawingTextEvidence[pg.cloudPath]?.version===1&&p.drawingTextEvidence[pg.cloudPath].tagSet===5)continue;
     const original=originals.slice().reverse().find(o=>o.file_name===pg.sourceName&&/\.pdf$/i.test(o.file_name));
     if(!original)continue;
     if(!groups.has(original.object_path))groups.set(original.object_path,[]);
@@ -6481,12 +6557,13 @@ async function readDrawingPagesAI(base,prompt,pages,pageInfo,floorOnly,signal,ta
     return {...mergeDrawingAIResults([await one(all,"")]),failed:[]};
   }
   const runs=[],failed=[];
+  const refsFor=g=>{const codes=new Set((textEvidence[pages[g].cloudPath]?.tags||[]).map(t=>drawingTagKey(t.code)));const candidates=refAll.length?refAll:all.filter(x=>x!==g);return candidates.slice().sort((a,b)=>{const score=i=>(textEvidence[pages[i].cloudPath]?.tags||[]).filter(t=>codes.has(drawingTagKey(t.code))).length;return score(b)-score(a)||refRank(pageInfo[a].kind)-refRank(pageInfo[b].kind)||a-b}).slice(0,8)};
   for(let k=0;k<planIdx.length;k++){
     signal?.throwIfAborted();
-    const g=planIdx[k];
+    const g=planIdx[k],pageRefs=refsFor(g);
     S.aiLog=`AI กำลังอ่านแปลนทีละหน้า · หน้า ${g+1} (${k+1}/${planIdx.length})${refIdx.length?` + Schedule/Detail ${refIdx.length} หน้าเป็นข้อมูลอ้างอิง`:""}…`;render();
     const note=`\nรอบนี้อ่านแปลนทีละหน้า: คืนช่องเปิดเฉพาะที่อยู่ในหน้า index 0 (${pageInfo[g].label}) เท่านั้น ไล่ดูภาพขยายทุกส่วนของหน้านี้ให้ครบทุกห้องก่อนตอบ${refIdx.length?" · หน้า index 1 ขึ้นไปเป็น Schedule/Detail ใช้อ้างอิงขนาดและสเปกเท่านั้น ห้ามคืนรายการที่ไม่มีตำแหน่งในหน้า index 0":""} · ref.page ของช่องเปิดต้องเป็น 0`;
-    try{runs.push(await one([g,...refIdx],note,k===0?"drawing":"drawing_page"))}
+    try{runs.push(await one([g,...pageRefs],note,k===0?"drawing":"drawing_page"))}
     catch(e){if(signal?.aborted||e.name==="AbortError")throw e;failed.push(`หน้า ${g+1}: ${e.message||e}`)}
   }
   if(!runs.length)throw new Error(failed.join(" · "));
@@ -6505,7 +6582,7 @@ function mergeDrawingAIResults(runs){
       const ref=it.ref&&typeof it.ref==="object"?{...it.ref,page:toGlobal(map,it.ref.page)}:it.ref;
       // Schedule rows can come back from every per-page call; keep the first copy only.
       if(runs.length>1&&ref&&Number.isInteger(ref.page)&&ref.page!==map[0]){const key=[it.code,it.storey,it.location].join("|");if(seen.has(key))continue;seen.add(key)}
-      merged.items.push({...it,ref,_jobId:out.job_id||null});
+      merged.items.push({...it,ref,material_spec:it.material_spec?{...it.material_spec,schedule_ref:it.material_spec.schedule_ref?{...it.material_spec.schedule_ref,page:toGlobal(map,it.material_spec.schedule_ref.page)}:null}:undefined,_jobId:out.job_id||null});
     }
     if(meta.notes&&!notes.includes(meta.notes))notes.push(meta.notes);
     for(const [key,value] of Object.entries(meta.values))if(!merged.project_metadata[key]){const ev=meta.evidence[key]||{};merged.project_metadata[key]={value,page:toGlobal(map,ev.page),confidence:ev.confidence??null}}
@@ -6548,6 +6625,7 @@ function aggregateOpeningRows(items,planPages){
       const differs=k=>rows.some(r=>(r[k]??null)!==(rows[0][k]??null));
       g.mismatch=[];
       if(differs("leaves")){g.leaves=null;g.mismatch.push("จำนวนบานต่อชุด");notes.push("จำนวนบานต่อชุดไม่ตรงกันระหว่างตำแหน่ง — ต้องยืนยัน")}
+      if(rows.some(r=>JSON.stringify(r.material_spec||null)!==JSON.stringify(rows[0].material_spec||null))){g.material_spec={...(rows[0].material_spec||{}),status:'conflict',category:'unknown',notes:'สเปกวัสดุไม่ตรงกันระหว่างตำแหน่ง'};g.material='';g.mismatch.push('วัสดุ')}
       if(differs("swing")){g.swing="";g.mismatch.push("ทิศเปิด");notes.push("ทิศเปิดต่างกันระหว่างตำแหน่ง — ต้องยืนยัน")}
       const confs=rows.map(r=>r.confidence).filter(c=>typeof c==="number");if(confs.length)g.confidence=Math.min(...confs);
     }
@@ -6614,6 +6692,7 @@ async function runAI(){
     aiCtl.signal.throwIfAborted();
     S.aiLog="กำลังอ่านชั้นข้อความจาก PDF เพื่อเทียบรหัสกับภาพ…";render();
     const pdfWarning=await collectDrawingPDFEvidence(cur(),imgs,aiCtl.signal);
+    if(!floorOnly)imgs.forEach((pg,i)=>{const ev=cur().drawingTextEvidence?.[pg.cloudPath];if(ev?.is_schedule&&!pg.kindManual)pageInfo[i].kind='Door schedule'});
     await flushTrainingQueue();const stamp=await drawingKnowledgeStamp();S.aiCacheContext={reuse:cur().reuseDrawingResults!==false,stamp};
     await prepareDrawingDetailViews(cur(),imgs,aiCtl.signal);
     // Tag-crop sheets need a server that accepts them (analyze-drawing v14+); the #checklist text works with any version.
@@ -6626,8 +6705,8 @@ async function runAI(){
     if(image_paths.some(path=>typeof path!=="string"||!path))throw new Error("ภาพแบบยังบันทึกบน Supabase ไม่ครบ");
     aiCtl.signal.throwIfAborted();
     const catalog=products().map(p=>({code:p.code,name:p.name}));
-    const base={mode:"drawing",action:"drawing",project_id:cur()?.id||null,project_name:cur()?.name||"",catalog,architect_id:archId,source:"champaca-door-studio",read_mode:floorOnly?"floor_only":"auto",version:"ai-drawing-v14-tag-checklist",row_per_opening:true};
-    const out=await readDrawingPagesAI(base,prompt+"\nภาพทั้งหมดเป็นเอกสารชุดเดียวกัน ให้อ่านร่วมกัน ถ้ามี Door Schedule หรือ Detail ให้เทียบกับ Floor Plan หากไม่มีให้อ่าน Floor Plan ที่มีได้เลย ช่องเปิดที่มีในแปลนแล้วไม่ต้องคืนซ้ำเป็นรายการจาก Schedule หากข้อมูลขัดกันให้ระบุใน notes อ้างอิง ref.page แบบเริ่มที่ 0 ตาม page_info.index",selPages,pageInfo,floorOnly,aiCtl.signal,tagInfo,cur().drawingTextEvidence||{});
+    const base={mode:"drawing",action:"drawing",project_id:cur()?.id||null,project_name:cur()?.name||"",catalog,architect_id:archId,source:"champaca-door-studio",read_mode:floorOnly?"floor_only":"auto",version:"ai-drawing-v37-material-evidence",row_per_opening:true,material_matching:true};
+    const out=await readDrawingPagesAI(base,prompt+V37_MATERIAL_PROMPT+"\nภาพทั้งหมดเป็นเอกสารชุดเดียวกัน ให้อ่านร่วมกัน ถ้ามี Door Schedule หรือ Detail ให้เทียบกับ Floor Plan หากไม่มีให้อ่าน Floor Plan ที่มีได้เลย ช่องเปิดที่มีในแปลนแล้วไม่ต้องคืนซ้ำเป็นรายการจาก Schedule หากข้อมูลขัดกันให้ระบุใน notes อ้างอิง ref.page แบบเริ่มที่ 0 ตาม page_info.index",selPages,pageInfo,floorOnly,aiCtl.signal,tagInfo,cur().drawingTextEvidence||{});
     aiCtl.signal.throwIfAborted();
     const result=out.result;
     if(!Array.isArray(result.items))throw new Error("AI ส่งผลไม่ครบ กรุณาลองใหม่");
@@ -6637,7 +6716,7 @@ async function runAI(){
     const projectMeta=applyDrawingProjectMetadata(cur(),result);
     result.notes=projectMeta.notes;
     {const pj=cur();if(pj&&out.architect&&out.architect.id&&!pj.architectId){pj.architectId=out.architect.id;pj.architectAuto=true;persistProject(pj)}}
-    const items=(result&&Array.isArray(result.items)?result.items:[]).map(prepareDrawingEvidence).map(r=>addDrawingRemark(floorOnly?prepareFloorPlanItem(r):r)).map(r=>({on:true,code:String(r.code||"").trim()||"?",kind:r.kind==="window"?"window":"door",location:r.location||"",storey:r.storey||"",type:r.type,needsSchedule:!!r.needsSchedule,floorPlanOnly:floorOnly,leaves:r.leaves,qty:r.qty,dw:num(r.width_mm),dh:num(r.height_mm),aiDim:r.ai_dim||null,dimFrom:r.dim_from||null,pattern:r.pattern||"",material:r.material||"",notes:drawingShortNote(r),aiNotes:r.notes||"",conf:typeof r.confidence==="number"?r.confidence:null,est:!!r.estimated,untagged:!!r.untagged||!String(r.code||"").trim(),swing:r.swing==="out"?"OUT":r.swing==="in"?"IN":"",ref:r.ref&&typeof r.ref==="object"?r.ref:null,site:!!r.site,sourceJobId:r._jobId||null,sourceRefs:r.sourceRefs||null,mw3:Array.isArray(r.measure_w)?r.measure_w.map(num):null,mh2:Array.isArray(r.measure_h)?r.measure_h.map(num):null,wall:num(r.wall_mm),floor:num(r.floor_mm)||0,th:["none","rebate","flush"].includes(r.threshold)?r.threshold:null,leafT:num(r.leaf_t),checker:r.checker||"",cdate:r.check_date||"",aiOriginal:r._source||{code:String(r.code||"").trim()||"?",location:r.location||"",storey:r.storey||"",type:r.type||"",leaves:r.leaves,qty:r.qty,width_mm:num(r.width_mm),height_mm:num(r.height_mm),pattern:r.pattern||"",material:r.material||"",confidence:typeof r.confidence==="number"?r.confidence:null,estimated:!!r.estimated,notes:r.notes||""}})).map(r=>{if(r.site){const ws=(r.mw3||[]).filter(x=>x!=null),hs=(r.mh2||[]).filter(x=>x!=null);r.mw=ws.length?Math.min(...ws):null;r.mh=hs.length?Math.min(...hs):null}return r});
+    const items=(result&&Array.isArray(result.items)?result.items:[]).map(prepareDrawingEvidence).map(r=>addDrawingRemark(floorOnly?prepareFloorPlanItem(r):r)).map(r=>({on:true,code:String(r.code||"").trim()||"?",kind:r.kind==="window"?"window":"door",location:r.location||"",storey:r.storey||"",type:r.type,needsSchedule:!!r.needsSchedule,floorPlanOnly:floorOnly,leaves:r.leaves,qty:r.qty,dw:num(r.width_mm),dh:num(r.height_mm),aiDim:r.ai_dim||null,dimFrom:r.dim_from||null,pattern:r.pattern||"",material:r.material||"",materialSpec:r.materialSpec||drawingMaterialSpec(r),notes:drawingShortNote(r),aiNotes:r.notes||"",conf:typeof r.confidence==="number"?r.confidence:null,est:!!r.estimated,untagged:!!r.untagged||!String(r.code||"").trim(),swing:r.swing==="out"?"OUT":r.swing==="in"?"IN":"",ref:r.ref&&typeof r.ref==="object"?r.ref:null,site:!!r.site,sourceJobId:r._jobId||null,sourceRefs:r.sourceRefs||null,mw3:Array.isArray(r.measure_w)?r.measure_w.map(num):null,mh2:Array.isArray(r.measure_h)?r.measure_h.map(num):null,wall:num(r.wall_mm),floor:num(r.floor_mm)||0,th:["none","rebate","flush"].includes(r.threshold)?r.threshold:null,leafT:num(r.leaf_t),checker:r.checker||"",cdate:r.check_date||"",aiOriginal:r._source||{code:String(r.code||"").trim()||"?",location:r.location||"",storey:r.storey||"",type:r.type||"",leaves:r.leaves,qty:r.qty,width_mm:num(r.width_mm),height_mm:num(r.height_mm),pattern:r.pattern||"",material:r.material||"",confidence:typeof r.confidence==="number"?r.confidence:null,estimated:!!r.estimated,notes:r.notes||""}})).map(r=>{if(r.site){const ws=(r.mw3||[]).filter(x=>x!=null),hs=(r.mh2||[]).filter(x=>x!=null);r.mw=ws.length?Math.min(...ws):null;r.mh=hs.length?Math.min(...hs):null}return r});
     items.forEach(r=>{const why=[r.qty==null&&"จำนวนชุด",r.leaves==null&&"จำนวนบาน",r.type==="รอยืนยัน"&&"ประเภทการเปิด",!Array.isArray(r.ref?.box)&&"ตำแหน่งในแบบ"].filter(Boolean);if(why.length){r.on=false;r.offReason="ขาด"+why.join(", ")}});
     let nu=0;items.forEach(r=>{if(r.untagged){r.on=false;r.code=(floorOnly?"TEMP-":"N")+String(++nu).padStart(2,"0")}});
     // What the review table showed before any human edit; kbAutoSaveExamples compares against this, not the raw AI JSON (types and sizes are normalised above).
@@ -6645,6 +6724,7 @@ async function runAI(){
     S.staged={items,project:projectMeta.values.name||(typeof result.project==="string"?result.project:""),notes:[result.notes,!items.length?"รบกวนส่ง Door Schedule มาให้อ่านเพิ่มเติม — ยังอ่านรายการจากหน้าที่เลือกไม่ได้":""].filter(Boolean).join(" · "),pages:selPages,symbolReference:result.symbol_reference||null,evidenceReview:result.evidence_review||null,jobId:out.job_id||null,jobIds:out.job_ids||[],architectId:(out.architect&&out.architect.id)||archId||null};
     const kn=out.knowledge&&(out.knowledge.rules||out.knowledge.examples)?` · ใช้ความรู้ของ ${out.architect?(out.architect.short_code||out.architect.name):"สถาปนิก"}: กติกา ${out.knowledge.rules} ข้อ ตัวอย่าง ${out.knowledge.examples}`:out.architect&&!out.architect.selected?` · ตรวจพบแบบของ ${out.architect.short_code||out.architect.name}`:"";
     const symbolNote=result.symbol_reference?` · ใช้ฐานสัญลักษณ์ ${result.symbol_reference.rule_count} กติกา / ${result.symbol_reference.source_image_count} ภาพอ้างอิง`:"";
+    prepareReviewEvidence(S.staged).catch(()=>{});
     S.aiLog=(items.length?`ประมวลผล ${imgs.length} หน้า / ${out.runs} รอบ${out.cache_hits?` · ใช้ผลเดิม ${out.cache_hits} รอบ`:""} · ${items.length} รายการ · ตรวจค่าที่ติดธงก่อนนำเข้า`:`ยังอ่านรายการจากหน้าที่เลือกไม่ได้ — รบกวนส่ง Door Schedule มาให้อ่านเพิ่มเติม`)+kn+symbolNote+(pdfWarning?" · "+pdfWarning:"")+(tagWarning?" · "+tagWarning:"")+(out.refNote?" · "+out.refNote:"")+(out.failed.length?" · อ่านไม่สำเร็จบางหน้า (กดอ่านเฉพาะหน้านั้นใหม่ได้): "+out.failed.join(" · "):"");
   }catch(e){
     if(e.name==="AbortError")S.aiLog="หยุดรอผลแล้ว งานที่เซิร์ฟเวอร์รับไว้ยังอาจประมวลผลต่อ ตรวจได้ในประวัติ AI";else S.aiLog="AI อ่านรอบเดียวไม่สำเร็จ (ยังไม่นำเข้าผล): "+(e.message||e);
@@ -6656,9 +6736,9 @@ async function importStaged(){
   try{
   const p=cur();const mode=(document.querySelector('input[name=mergeMode]:checked')||{}).value;
   const rows=S.staged.items.filter(r=>r.on);let upd=0,add=0;
-  const toItem0=r=>{const pc=prodBy(r.pattern)?prodBy(r.pattern).code:"";return newItem({code:r.code,kind:r.kind,location:r.location,storey:r.storey||"ไม่ระบุชั้น",type:r.type,leaves:r.leaves,qty:r.qty,dw:r.site?null:r.dw,dh:r.site?null:r.dh,swing:isSlide({type:r.type})?"SLIDE":isFold({type:r.type})?"FOLD":"UNKNOWN",note:r.notes||"",catalog:pc,approach:r.pattern==="custom"?"custom":"catalog",conf:r.conf,src:"ai",leafT:r.leafT||null,jamb:/เฉพาะบาน/.test(r.type)?"NONE":"UNKNOWN"})};
+  const toItem0=r=>{const pc=r.materialSpec?.category==='aluminium'||r.materialSpec?.category==='mixed'?'':prodBy(r.pattern)?prodBy(r.pattern).code:'';return newItem({code:r.code,kind:r.kind,location:r.location,storey:r.storey||"ไม่ระบุชั้น",type:r.type,leaves:r.leaves,qty:r.qty,dw:r.site?null:r.dw,dh:r.site?null:r.dh,swing:isSlide({type:r.type})?"SLIDE":isFold({type:r.type})?"FOLD":"UNKNOWN",note:r.notes||"",catalog:pc,approach:r.pattern==="custom"?"custom":"catalog",conf:r.conf,src:"ai",leafT:r.leafT||null,jamb:/เฉพาะบาน/.test(r.type)?"NONE":"UNKNOWN"})};
   const toItem=r=>{const it=toItem0(r);if(r.swing)it.swing=r.swing;
-    it.material=r.material||"";it.depth=null;it.handing="UNKNOWN";it.floorPlanOnly=!!r.floorPlanOnly;
+    it.material=r.material||"";it.materialSpec=r.materialSpec||drawingMaterialSpec(r);it.depth=null;it.handing="UNKNOWN";it.floorPlanOnly=!!r.floorPlanOnly;
     it.leaves=r.leaves;it.qty=r.qty;
     if(!r.dw||!r.dh||r.dimFrom||r.qty==null||r.type==="รอยืนยัน")it.issue="dimension";
     it.aiNotes=r.aiNotes||"";if(r.dimFrom)it.dimFrom=r.dimFrom;
@@ -6668,12 +6748,12 @@ async function importStaged(){
   if(mode==="replace")p.items=[];const changed=[],refJobs=[];const pages=S.staged.pages||[];
   rows.forEach(r=>{
     const ex=mode==="update"?p.items.find(i=>i.code===r.code&&i.storey===r.storey&&i.location===r.location):null;
-    if(ex){ex.aiEvidence=trainingEvidence(r,S.staged);if(r.notes&&!String(ex.note||"").includes(r.notes))ex.note=[ex.note,r.notes].filter(Boolean).join(" · ");if(r.aiNotes)ex.aiNotes=r.aiNotes;applySite(ex,r);if(!r.site){if(r.dw&&r.dh&&ex.dw&&ex.dh&&(r.dw!==ex.dw||r.dh!==ex.dh)){ex.dimHist=(ex.dimHist||[]).concat([{w:ex.dw,h:ex.dh,date:isoDate(),src:"แบบปรับ (AI)"}]);changed.push(ex.code)}if(r.dw)ex.dw=r.dw;if(r.dh)ex.dh=r.dh;for(const k of ["qty","leaves","material","storey"]){if(r[k]!=null&&r[k]!=="")ex[k]=r[k]}if(r.type&&r.type!=="รอยืนยัน")ex.type=r.type;if(r.swing)ex.swing=r.swing;if(r.leafT)ex.leafT=r.leafT;if(r.pattern&&prodBy(r.pattern))ex.catalog=prodBy(r.pattern).code}if(r.ref)refJobs.push({it:ex,ref:r.ref});upd++}
-    else{const it=toItem(r);it.aiEvidence=trainingEvidence(r,S.staged);applySite(it,r);p.items.push(it);if(r.ref)refJobs.push({it,ref:r.ref});add++}
+    if(ex){ex.aiEvidence=trainingEvidence(r,S.staged);ex.materialSpec=r.materialSpec||drawingMaterialSpec(r);if(r.notes&&!String(ex.note||"").includes(r.notes))ex.note=[ex.note,r.notes].filter(Boolean).join(" · ");if(r.aiNotes)ex.aiNotes=r.aiNotes;applySite(ex,r);if(!r.site){if(r.dw&&r.dh&&ex.dw&&ex.dh&&(r.dw!==ex.dw||r.dh!==ex.dh)){ex.dimHist=(ex.dimHist||[]).concat([{w:ex.dw,h:ex.dh,date:isoDate(),src:"แบบปรับ (AI)"}]);changed.push(ex.code)}if(r.dw)ex.dw=r.dw;if(r.dh)ex.dh=r.dh;for(const k of ["qty","leaves","material","storey"]){if(r[k]!=null&&r[k]!=="")ex[k]=r[k]}if(r.type&&r.type!=="รอยืนยัน")ex.type=r.type;if(r.swing)ex.swing=r.swing;if(r.leafT)ex.leafT=r.leafT;if(r.pattern&&prodBy(r.pattern))ex.catalog=prodBy(r.pattern).code}if(!r.site){ex.scheduleImage=null;ex.scheduleEvidence=null;if(ex.materialSpec?.status==='matched'&&['aluminium','mixed'].includes(ex.materialSpec.category)){ex.catalog='';ex.approach='custom';ex.note=[ex.note,'วัสดุอะลูมิเนียมหรือวัสดุผสม ต้องตรวจรุ่นและราคาเฉพาะ ไม่ใช้รุ่นงานไม้เดิม'].filter(Boolean).join(' · ')}}if(r.ref)refJobs.push({it:ex,ref:r.ref,scheduleRef:r.materialSpec?.schedule_ref});upd++}
+    else{const it=toItem(r);it.aiEvidence=trainingEvidence(r,S.staged);applySite(it,r);p.items.push(it);if(r.ref)refJobs.push({it,ref:r.ref,scheduleRef:r.materialSpec?.schedule_ref});add++}
   });
   try{kbRecordEval(S.staged,rows)}catch(e){console.warn("eval",e)}
   S.staged=null;persistProject(p);logEvent("ai_import",{updated:upd,added:add},p.id);toast(`อัปเดต ${upd} · เพิ่ม ${add} รายการ${changed.length?` · แบบปรับขนาด ${changed.join(", ")}`:""}`);S.step="site";render();
-  if(refJobs.length&&pages.length){autoRefs(refJobs,pages).then(n=>{if(n){persistProject(p);render();toast(`ตัดภาพอ้างอิงจากแบบ ${n} รายการ`)}})}
+  if(refJobs.length&&pages.length){autoRefs(refJobs,pages).then(n=>{persistProject(p);render();toast(n?`เก็บภาพหลักฐานจากแบบ ${n} ภาพ`:'ยังสร้างภาพหลักฐานไม่ได้ กรุณาตรวจการเชื่อมต่อหรือหน้าต้นฉบับ')})}
   }catch(e){toast("นำเข้ายังไม่สมบูรณ์: "+e.message)}finally{S.reviewImportBusy=false}
 }
 /* ================= 3. site ================= */
@@ -7238,10 +7318,13 @@ async function cropSave(){
 }
 /* AI-assisted: crop each item's reference from the page the AI found it on */
 async function autoRefs(items,pages){
-  let n=0;for(const {it,ref} of items){try{const pg=pages[ref.page];if(!pg||!Array.isArray(ref.box))continue;const [x,y,right,bottom]=ref.box.map(Number),w=right-x,h=bottom-y;if(!(w>0&&h>0))continue;
-    const pad=.02;const b={x:Math.max(0,x-pad),y:Math.max(0,y-pad),w:Math.min(1-Math.max(0,x-pad),w+pad*2),h:Math.min(1-Math.max(0,y-pad),h+pad*2)};
-    it.ref=await storeBlob(await cropBlob(pg.url,b));n++}catch(e){}}
-  return n;
+ let n=0;for(const {it,ref,scheduleRef} of items){
+  it.planEvidence=drawingSourceRecord(ref,pages);it.scheduleEvidence=drawingSourceRecord(scheduleRef,pages);it.referenceError='';
+  for(const [kind,r] of [['plan',ref],['schedule',scheduleRef]]){const pg=pages[r?.page];if(!pg?.url||!drawingRefValid(r))continue;
+   try{const [x,y,x1,y1]=r.box,pad=.01,x0=Math.max(0,x-pad),y0=Math.max(0,y-pad);const image=await storeBlob(await cropBlob(pg.url,{x:x0,y:y0,w:Math.min(1,x1+pad)-x0,h:Math.min(1,y1+pad)-y0}));it[kind==='plan'?'ref':'scheduleImage']=image;n++}
+   catch(e){it.referenceError=[it.referenceError,kind+': '+(e.message||e)].filter(Boolean).join(' · ')}
+  }
+ }return n;
 }
 /* site list as cards (like a worksheet board) */
 function siteCard(it){
@@ -7479,10 +7562,48 @@ function modelPhotoDimensions(it,pr){
  </div>`;
 }
 
+/* Fit only approval-sheet diagrams to their actual extents; dimensions stay unchanged. */
+function approvalDrawingSVG(it){
+  const original=shopSVG(it,{compact:true}).svg;
+  const host=document.createElement('div');
+  host.style.cssText='position:fixed;left:-20000px;top:0;width:740px;height:740px;visibility:hidden;pointer-events:none';
+  try{
+    host.innerHTML=original;document.body.appendChild(host);const svg=host.querySelector('svg');
+    svg.setAttribute('class','sap-fit sap-clear-drawing');
+    svg.setAttribute('role','img');svg.setAttribute('aria-label',`แบบช่องปูน บานประตู ทิศเปิด และด้านข้าง ${it.code||''}`);
+    svg.querySelectorAll('line,path,rect,circle,polyline,polygon').forEach(el=>{
+      if(el.closest('defs'))return;
+      const stroke=el.getAttribute('stroke')||el.closest('g[stroke]')?.getAttribute('stroke');
+      if(!stroke||stroke==='none')return;
+      const dimension=stroke.toLowerCase()===DIMC.toLowerCase();
+      el.style.stroke=dimension?'#123fa8':stroke==='#666'||stroke==='#999'?'#484848':stroke;
+      el.style.strokeWidth=dimension?'1.05px':'1.35px';
+      el.style.vectorEffect='non-scaling-stroke';
+    });
+    svg.querySelectorAll('text').forEach(el=>{
+      const size=Number(el.getAttribute('font-size'));
+      if(size>0)el.setAttribute('font-size',String(Math.round(size*1.15*10)/10));
+      const colour=el.getAttribute('fill');
+      if(colour===DIMC)el.setAttribute('fill','#123fa8');
+      if(colour==='#666'||colour==='#999')el.setAttribute('fill','#484848');
+      if(!el.getAttribute('font-weight'))el.setAttribute('font-weight','500');
+    });
+    const top=svg.querySelector('[data-approval-top]'),front=svg.querySelector('[data-approval-elevation]');
+    if(top&&front){
+      const t=top.getBBox(),f=front.getBBox(),gap=f.y-(t.y+t.height);
+      if(gap>36)front.setAttribute('transform',`translate(0 ${-(gap-36)})`);
+    }
+    const box=svg.getBBox(),pad=18;
+    if(box.width>0&&box.height>0&&[box.x,box.y,box.width,box.height].every(Number.isFinite))
+      svg.setAttribute('viewBox',`${box.x-pad} ${box.y-pad} ${box.width+2*pad} ${box.height+2*pad}`);
+    return svg.outerHTML;
+  }catch(e){console.warn('approval diagram fit',e.message);return original}
+  finally{host.remove()}
+}
 function sapPaper(p,it,idx,total){
   const sd=shop(it);const pr=prodBy(it.catalog);const ap=p.approval&&p.approval.version===p.version?p.approval:null;const st=ap&&ap.items&&ap.items[it.id];
   const ref=refURL(it);const cps=checkpoints(it);const {scale}=shopSVG(it);const iss=itemIssues(it);
-  const rows=[["รหัส / ชั้น",`${it.code} · ${it.storey||"-"}`],["ห้อง / ตำแหน่ง",it.location||"-"],["W × H จากแบบ",it.dw?`${it.dw} × ${it.dh} mm`:"-"],["W × H วัดช่องปูน",it.mw!=null?`${it.mw} × ${it.mh} mm`:"ยังไม่วัด"],
+  const rows=[["วัสดุวงกบ",it.materialSpec?.frame||"รอยืนยัน"],["วัสดุบาน",it.materialSpec?.panel||it.material||"รอยืนยัน"],["หลักฐานวัสดุ",it.materialSpec?.status==='matched'?it.materialSpec.source_code+' · Door Schedule':'รอยืนยัน / ผลอ่านเดิม'],["รหัส / ชั้น",`${it.code} · ${it.storey||"-"}`],["ห้อง / ตำแหน่ง",it.location||"-"],["W × H จากแบบ",it.dw?`${it.dw} × ${it.dh} mm`:"-"],["W × H วัดช่องปูน",it.mw!=null?`${it.mw} × ${it.mh} mm`:"ยังไม่วัด"],
     ["ความหนาผนัง / วงกบลึก",`${it.depth??"-"} / ${jambDepth(it)} mm`],["±Floor / ธรณี",`${it.floorFinish||0} mm · ${TH_TYPES[thType(it)]}`],["ขนาดวงกบ",sd&&!sd.leafOnly?`${f1(sd.jW)} × ${f1(sd.jH)} mm`:"-"],
     ["ขนาดบาน",sd&&!isOpenOnly(it)?`${sd.lt} × ${f1(sd.leafWR)} × ${f1(sd.leafH)}${sd.n>1?` × ${sd.n}`:""}`:"-"],["ทิศเปิด",dinText(it)],["ที่มาของขนาด",it.mw!=null?"วัดหน้างาน":"แบบลูกค้า (ยังไม่มีขนาดวัดหน้างาน)"]];
   const notes=[it.note,...(it.pins||[]).map((x,i)=>`จุด ${i+1}: ${x.note||"-"}`)].filter(Boolean);const open=openIssues(it);
@@ -7491,15 +7612,14 @@ function sapPaper(p,it,idx,total){
   <header class="sap-h"><img src="${LOGO_URI}" alt="CHAMPACA" class="sap-logo"><div class="sap-hr"><b>${esc(p.name)}</b><span>SALES APPROVAL · Version ${p.version}</span></div></header>
   <div class="sap-title"><b>${esc(it.code)}</b><span>|</span>แบบเสนอขาย${isWindow(it)?"หน้าต่าง":"ประตู"} / SALES APPROVAL DRAWING${pr?` <em>${esc(pr.code)} ${esc(pr.name)}</em>`:""}</div>
   <div class="sap-grid">
-   <section class="sap-c1"><h4>แบบอ้างอิง / ${ref?"ORIGINAL DESIGN REFERENCE":"CHAMPACA DRAWING"}</h4><p class="sap-sub">${ref?"ภาพตัดจากแบบผู้ออกแบบ · มิติต้นฉบับตามแบบ":"สร้างจากข้อมูลหน้างาน · ตามสัดส่วนจริง · หน่วย mm"}</p>
-    <div class="sap-ref">${ref?`<img src="${esc(ref)}" alt="">${(it.pins||[]).map((x,i)=>`<span class="pin" style="left:${x.x*100}%;top:${x.y*100}%">${i+1}</span>`).join("")}`:shopSVG(it,{compact:true}).svg.replace("<svg ",'<svg class="sap-fit" ')}</div>
+   <section class="sap-c1"><h4>แบบอนุมัติ / CHAMPACA DRAWING</h4><p class="sap-sub">ช่องปูน · รูปบาน · ทิศเปิด · รูปด้านข้าง · หน่วย mm</p>
+    <div class="sap-ref sap-generated" data-approval-views>${approvalDrawingSVG(it)}</div>
     <h4 style="margin-top:14px">SITE NOTES / ประเด็นหน้างาน</h4>
     <div class="sap-notes">${notes.length?notes.map(n=>`<div>• ${esc(n)}</div>`).join(""):"ไม่มีประเด็นเพิ่มเติม"}</div>${open.length?`<h4 style="margin-top:8px;color:#B4531F">จุดที่ต้องตกลงก่อนอนุมัติ</h4><ol class="sap-open-iss">${open.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}<div class="sap-rel ${open.length?"hold":"ok"}">${esc(releaseText(it))}</div></section>
    <section class="sap-c2"><h4>ข้อมูลตรวจหน้างาน / SITE RECORD</h4>
     <table class="sap-tab">${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join("")}</table>
-    ${prodImg(pr)?`<h4 style="margin-top:14px">รูปแบบ${isWindow(it)?"หน้าต่าง":"ประตู"} / DOOR MODEL</h4><div class="sap-open sap-photo sap-photo-dimensions">${modelPhotoDimensions(it,pr)}</div>
-    <div class="sap-leg"><b>${esc(pr.code)}</b> ${esc(pr.name)}${pr.family?` · ${esc(pr.family)}`:""} · ภาพตัวอย่างลายไม้และสี</div>`:`<h4 style="margin-top:14px">รูปช่องเปิด / OPENING · TRUE SCALE</h4><div class="sap-open">${compareSVG(it)}</div>
-    <div class="sap-leg"><span class="lg dash"></span> ตามแบบ <span class="lg solid"></span> วัดจริง <span class="lg red"></span> แบบเดิม · พื้นสี = บาน</div>`}
+    ${prodImg(pr)?`<h4 style="margin-top:14px">ภาพรุ่นประตู / DOOR MODEL</h4><div class="sap-open sap-photo sap-photo-dimensions" data-approval-model>${modelPhotoDimensions(it,pr)}</div><div class="sap-leg"><b>${esc(pr.code)}</b> ${esc(pr.name)} · ภาพตัวอย่างรุ่นสินค้า</div>`:`<h4 style="margin-top:14px">รูปช่องเปิด / OPENING · TRUE SCALE</h4><div class="sap-open" data-approval-opening>${compareSVG(it)}</div><div class="sap-leg">ยังไม่มีภาพรุ่นสินค้า · แสดงรูปช่องเปิดตามข้อมูลรายการ</div>`}
+
 </section>
    <aside class="sap-c3"><h4>CHAMPACA / PROJECT</h4><div class="sap-pn">${esc(p.name)}</div>
     <div class="sap-meta">${[["Customer",p.customer],["Door / Window",`${it.code} ${tagOf(it)!==it.code?"· "+tagOf(it):""}`],["Quantity",`${it.qty} ชุด / ${sd?sd.n:1} บาน`],["Version",p.version],["Units · Scale",`mm · ${scale}`],["สถานะ",ap?(approved?"อนุมัติแล้ว":"ขอแก้ไข"):"แบบเสนอขาย รอลูกค้าอนุมัติ"]].map(r=>`<div><span>${esc(r[0])}</span>${esc(r[1])}</div>`).join("")}</div>
@@ -7513,7 +7633,21 @@ function sapPaper(p,it,idx,total){
   </div>
   <footer class="sap-f"><span>FOR APPROVAL · ขนาดผลิตยืนยันตามแบบ Shop Drawing ที่ลูกค้าลงนาม · อุปกรณ์และสีตามรายการที่อนุมัติ${p.isSample?" · เอกสารตัวอย่าง":""}</span><span>Ver.${p.version} | ${idx+1} / ${total}</span></footer></div>`;
 }
-function sapAll(p){return p.items.map((it,i)=>sapPaper(p,it,i,p.items.length)).join("")}
+/* Reference images supplement approval geometry; they never replace the four drawing views. */
+function sapReferencePaper(p,it,idx,total){
+  const ref=refURL(it),pr=prodBy(it.catalog),photo=prodImg(pr);
+  const cards=[];
+  if(ref)cards.push(`<figure><figcaption>แปลนอ้างอิง / FLOOR PLAN</figcaption><div class="sap-evidence-image"><img src="${esc(ref)}" alt="แปลนอ้างอิง ${esc(it.code)}">${(it.pins||[]).map((x,i)=>`<span class="pin" style="left:${x.x*100}%;top:${x.y*100}%">${i+1}</span>`).join("")}</div></figure>`);
+  if(it.scheduleImage)cards.push(`<figure><figcaption>ตารางประตู / DOOR SCHEDULE</figcaption>${savedScheduleHTML(it)}</figure>`);
+  if(photo)cards.push(`<figure><figcaption>รูปเปรียบเทียบช่องเปิด / OPENING · TRUE SCALE</figcaption><div class="sap-evidence-image" data-reference-opening>${compareSVG(it)}</div><div class="sap-leg"><span class="lg dash"></span> ตามแบบ <span class="lg solid"></span> วัดจริง <span class="lg red"></span> แบบเดิม · พื้นสี = บาน</div></figure>`);
+  if(!cards.length)return "";
+  return `<div class="a3 sap sap-evidence"><header class="sap-h"><img src="${LOGO_URI}" alt="CHAMPACA" class="sap-logo"><div class="sap-hr"><b>${esc(p.name)}</b><span>REFERENCE · Version ${p.version}</span></div></header><div class="sap-title"><b>${esc(it.code)}</b><span>|</span>เอกสารอ้างอิงประกอบแบบอนุมัติ</div><p class="sap-sub">ภาพต้นฉบับและรูปเปรียบเทียบช่องเปิดใช้ประกอบการตรวจสอบ · ขนาดและทิศเปิดดูหน้าช่องปูน / รูปบาน / รูปด้านข้าง</p><div class="sap-evidence-grid" style="--evidence-cols:${cards.length}">${cards.join("")}</div><div class="sap-evidence-material">${drawingMaterialHTML(it)}</div><footer class="sap-f"><span>REFERENCE ONLY · หน้านี้ไม่มีผลแทนแบบอนุมัติที่ลงนาม</span><span>Ver.${p.version} | ${idx+1} / ${total}</span></footer></div>`;
+}
+function sapAll(p){
+  docsReadyProject(p);const pages=[];
+  p.items.forEach(it=>{pages.push({it,fn:sapPaper});if(refURL(it)||it.scheduleImage||prodImg(prodBy(it.catalog)))pages.push({it,fn:sapReferencePaper})});
+  return pages.map((x,i)=>docsItemSafe(x.fn,p,x.it,i,pages.length)).join("");
+}
 /* ================= quotation (Champaca WHN format) ================= */
 const COMPANY={name:"บริษัท จัมปาก้า จำกัด",addr:"142/5 ซอยศึกษาวิทยา ถนนสาทรเหนือ แขวงสีลม เขตบางรัก กรุงเทพฯ 10500",
   banks:["ธนาคารไทยพาณิชย์ สาขาสีลม บัญชีออมทรัพย์ เลขที่ 065-2-48951-1","ธนาคารกรุงเทพ สาขาสีลม บัญชีออมทรัพย์ เลขที่ 118-5-18786-9"]};
@@ -7669,6 +7803,7 @@ function quoteInfoCard(p){
 }
 /* ================= 6. approval drawing ================= */
 function vDocs(p){
+  docsReadyProject(p);if(!p.items.length)return docsEmpty(p);
   const c=counts(p);const ap=p.approval;const apOk=ap&&ap.version===p.version;
   const revised=ap&&ap.items?Object.values(ap.items).filter(x=>x.status==="revise").length:0;
   return head("ขั้นที่ 5","แบบและการอนุมัติ",`<button class="btn" data-act="newVersion">ออก Version ใหม่</button><button class="btn" data-act="pdfSap" ${!c.types?"disabled":""}>PDF แบบเสนอขาย</button><button class="btn" data-act="pdfDraw" ${!c.types?"disabled":""}>PDF แบบอนุมัติ (A3)</button><button class="btn" data-act="sendClickup" ${!c.types||S.cuBusy?"disabled":""} title="สร้าง/อัปเดต task ใน ClickUp (Sale&Draft-Floor Door Stair Fur.) สถานะ recheck draft พร้อมแนบ PDF แบบอนุมัติ">${S.cuBusy?"กำลังส่ง ClickUp…":"ส่งเข้า ClickUp"}</button><button class="btn" data-act="printMenu" data-kinds="sap,draw" ${!c.types?"disabled":""}>พิมพ์</button><button class="btn primary" data-act="openSign" ${!c.types?"disabled":""}>ลูกค้าเซ็นอนุมัติ</button>`)+sampleNote(p)+
@@ -7688,11 +7823,11 @@ function vDocs(p){
     <div class="row" style="margin-top:8px"><button class="btn sm ghost" data-act="resetStd">คืนค่าเริ่มต้น</button></div></details>
     <div style="margin-top:12px"><div class="row" style="justify-content:space-between"><span class="eyebrow">Revision · ปัจจุบัน Version ${p.version}</span><button class="btn sm ghost" data-act="revLog">Change Log (${(p.changeLog||[]).filter(e=>e.f!=="rev").length})</button></div>${p.revisions.length?`<table><tbody>${p.revisions.slice().reverse().map(r=>{const RS={customer:"ลูกค้าขอเปลี่ยน",designer:"แบบผู้ออกแบบเปลี่ยน",site:"หน้างานไม่ตรงแบบ",internal:"แก้ไขภายใน"};const hasSnap=(p.versions||[]).some(v=>v.ver===r.ver-1);return `<tr><td class="mono">Ver.${r.ver}</td><td>${esc(r.note)}${r.reason?`<div class="small muted">สาเหตุ: ${esc(RS[r.reason]||r.reason)}</div>`:""}</td><td class="small muted">${esc(r.date)}${r.by?`<br>${esc(r.by)}`:""}</td><td>${hasSnap?`<button class="btn sm ghost" data-act="revView" data-ver="${r.ver-1}">ดู Ver.${r.ver-1}</button>`:""}</td></tr>`}).join("")}</tbody></table>`:'<p class="small muted" style="margin:4px 0 0">Version 1 · ยังไม่มีการแก้ไข</p>'}</div></div>
   </div>
-  <div class="row" style="margin-bottom:10px"><button class="btn sm ${S.docTab==="sap"?"primary":""}" data-doctab="sap">แบบเสนอขาย · ลูกค้าเซ็น (${c.types} แผ่น)</button><button class="btn sm ${S.docTab==="draw"?"primary":""}" data-doctab="draw">แบบอนุมัติ A3 (${p.items.reduce((n,it)=>n+2+(cdValue(it).enabled?1:0),0)} แผ่น · รูปด้าน + Check Point)</button><button class="btn sm ${S.docTab==="split"?"primary":""}" data-doctab="split">ใบเสนอราคา · แบบแยก</button><button class="btn sm ${S.docTab==="lump"?"primary":""}" data-doctab="lump">ใบเสนอราคา · แบบรวม</button><span class="row small muted" style="margin-left:auto">ย่อ/ขยาย <input type="range" min="0.3" max="1" step="0.05" value="${S.zoom}" data-zoom aria-label="ย่อขยาย"></span><span class="small muted" id="dlNote"></span></div>
+  <div class="row" style="margin-bottom:10px"><button class="btn sm ${S.docTab==="sap"?"primary":""}" data-doctab="sap">แบบเสนอขาย · ลูกค้าเซ็น (${p.items.reduce((n,it)=>n+1+((refURL(it)||it.scheduleImage||prodImg(prodBy(it.catalog)))?1:0),0)} แผ่น)</button><button class="btn sm ${S.docTab==="draw"?"primary":""}" data-doctab="draw">แบบอนุมัติ A3 (${p.items.reduce((n,it)=>n+2+(cdValue(it).enabled?1:0),0)} แผ่น · รูปด้าน + Check Point)</button><button class="btn sm ${S.docTab==="split"?"primary":""}" data-doctab="split">ใบเสนอราคา · แบบแยก</button><button class="btn sm ${S.docTab==="lump"?"primary":""}" data-doctab="lump">ใบเสนอราคา · แบบรวม</button><span class="row small muted" style="margin-left:auto">ย่อ/ขยาย <input type="range" min="0.3" max="1" step="0.05" value="${S.zoom}" data-zoom aria-label="ย่อขยาย"></span><span class="small muted" id="dlNote"></span></div>
   <div class="sheet-wrap"><div class="zoomer" id="paperHost" style="--z:${S.zoom}"></div></div>`;
 }
 function tbf(id,label,key,val){return `<label class="f" for="${id}">${esc(label)}<input id="${id}" data-tb="${key}" value="${esc(val??"")}"></label>`}
-function a3All(p){const total=p.items.reduce((n,it)=>n+2+(cdValue(it).enabled?1:0),0);let idx=0;return p.items.map(it=>{let pages=a3Paper(p,it,idx++,total)+a3Paper(p,it,idx++,total,{detail:true});if(cdValue(it).enabled)pages+=cdApprovalSheet(p,it,idx++,total);return pages}).join('')}
+function a3All(p){docsReadyProject(p);const total=p.items.reduce((n,it)=>n+2+(cdValue(it).enabled?1:0),0);let idx=0;return p.items.map(it=>{let pages=docsItemSafe(a3Paper,p,it,idx++,total)+docsItemSafe(a3Paper,p,it,idx++,total,{detail:true});if(cdValue(it).enabled)pages+=cdApprovalSheet(p,it,idx++,total);return pages}).join('')}
 function a3Paper(p,it,idx,total,opt={}){
   const d=shop(it);const {svg,scale}=shopSVG(it);const ph=photoURL(it);const ap=p.approval&&p.approval.version===p.version?p.approval:null;
   const st=ap&&ap.items&&ap.items[it.id];const pr=prodBy(it.catalog);
@@ -7716,7 +7851,7 @@ function a3Paper(p,it,idx,total,opt={}){
    <div class="two"><div><span class="lbl">Model : </span>${esc(p.tb.model)}</div><div><span class="lbl">Version : </span>${p.version}</div></div>
    <div class="two"><div><span class="lbl">Dimension : </span>${d?`${d.w}×${d.h}`:"-"}</div><div><span class="lbl">Quantity : </span>${esc(it.qty)}</div></div>
    <div class="two"><div><span class="lbl">Date : </span>${isoDate()}</div><div><span class="lbl">Series : </span>${esc(p.tb.series)}</div></div>
-   <div><span class="lbl">Material : </span>${esc(it.material)}</div>
+   <div><span class="lbl">Material : </span>${esc(it.materialSpec?drawingMaterialLabel(it.materialSpec):it.material)}</div>
    <div><span class="lbl">Color : </span>${esc(it.color)}</div>
    <div class="desc"><div class="lbl">Description :</div><div class="val">${idx+1}.${esc(it.location||it.code)}</div>
     <div style="font-size:10.5px;margin-top:6px;padding-left:6px">${lines.map(esc).join("<br>")}</div>
@@ -7736,7 +7871,7 @@ function a3Paper(p,it,idx,total,opt={}){
   <div class="note">${!opt.detail&&openIssues(it).length?`<span style="color:#B4531F">*${esc(releaseText(it))} · ดูหน้าถัดไป ${openIssues(it).length} ข้อ</span><br>`:""}**หมายเหตุ** หากมีการแก้ไขแบบ หรือแบบผิดพลาด กรุณาแจ้งฝ่ายแบบทันที${p.isSample?" · เอกสารตัวอย่าง":""}</div>
   </div>`;
 }
-function mountDocs(){const p=cur();const host=$("#paperHost");if(!host)return;host.innerHTML=S.docTab==="split"||S.docTab==="lump"?quotePages(p,S.docTab).html:S.docTab==="sap"?sapAll(p):a3All(p)}
+function mountDocs(){const p=docsReadyProject(cur());const host=$("#paperHost");if(!host)return;host.innerHTML=S.docTab==="split"||S.docTab==="lump"?quotePages(p,S.docTab).html:S.docTab==="sap"?sapAll(p):a3All(p)}
 
 /* ---------- signature ---------- */
 function openSign(){
@@ -8096,7 +8231,7 @@ document.addEventListener("change",e=>{
   if(t.id==="fileXls"&&t.files.length){readXls(t.files[0]);t.value="";return}
   if(t.id==="capFile"&&t.files.length){capAddPhotos([...t.files]);t.value="";return}
   if(t.dataset.pgfloor!=null){if(drawingFloorsLocked())return;setDrawingPageFloor(cur(),+t.dataset.pgfloor,t.value);render();return}
-  if(t.dataset.pgkind!=null){S.pages[+t.dataset.pgkind].kind=t.value;return}
+  if(t.dataset.pgkind!=null){S.pages[+t.dataset.pgkind].kind=t.value;S.pages[+t.dataset.pgkind].kindManual=true;return}
   if(t.id==="filePhoto"&&t.files.length){setPhoto(t.files[0]);t.value="";return}
 });
 ["dragover","dragleave","drop"].forEach(ev=>document.addEventListener(ev,e=>{
@@ -9453,9 +9588,9 @@ function d3Build(it){
  const root=s.model,w=d.w/1000,h=d.h/1000,fw=d.jW/1000,fh=d.jH/1000,leg=Math.max(.025,d.leg/1000),depth=Math.max(.045,d.jambD/1000),lw=d.leafW/1000,lh=d.leafH/1000,lt=d.lt/1000;
  const jambGroup=new T.Group(),leafGroup=new T.Group();root.add(jambGroup,leafGroup);
  jambGroup.name='ChampacaJamb';leafGroup.name='ChampacaLeaves';jambGroup.userData.component='jamb';leafGroup.userData.component='leaf';s.parts={jamb:jambGroup,leaf:leafGroup};
- const tint=s.host.querySelector('[data-d3-colour]').value;
- const wood=new T.MeshPhysicalMaterial({map:d3Wood(T),bumpMap:d3ReliefMap(T),bumpScale:.00001,color:0xffffff,roughness:.48,metalness:0,clearcoat:.18,clearcoatRoughness:.42});
- const woodH=wood.clone();woodH.map=d3Wood(T,true);woodH.bumpMap=d3ReliefMap(T,true);const end=wood.clone();end.color.multiplyScalar(.88);
+ const tint=s.host.querySelector('[data-d3-colour]').value,isAluminium=it.materialSpec?.status==='matched'&&it.materialSpec?.category==='aluminium',scheduleGlass=it.materialSpec?.status==='matched'&&/GLASS|กระจก/i.test(it.materialSpec.panel||'');
+ const wood=new T.MeshPhysicalMaterial(isAluminium?{color:0xb7bdc3,roughness:.32,metalness:.75}:{map:d3Wood(T),bumpMap:d3ReliefMap(T),bumpScale:.00001,color:0xffffff,roughness:.48,metalness:0,clearcoat:.18,clearcoatRoughness:.42});wood.userData={materialRole:isAluminium?'aluminium-frame':'wood-sample'};
+ const woodH=wood.clone();woodH.map=isAluminium?null:d3Wood(T,true);woodH.bumpMap=isAluminium?null:d3ReliefMap(T,true);const end=wood.clone();end.color.multiplyScalar(.88);
  const metal=new T.MeshStandardMaterial({color:0xa5abb0,metalness:.78,roughness:.23,envMapIntensity:1.15});
  const dark=new T.MeshStandardMaterial({color:0x423126,roughness:.7});
  const glass=new T.MeshPhysicalMaterial({color:0xb7d8dc,metalness:0,roughness:.12,transparent:true,opacity:.32,side:T.DoubleSide,depthWrite:false});
@@ -9476,7 +9611,7 @@ function d3Build(it){
  }
  const custom=cdValue(it),customValid=custom.enabled&&!cdErrors(it).length;
  const pat=customValid?custom.base:(Number(it.grooveW)>0&&it.grooveMode!=='over'?'flushV':pr?.pat||'flushV'),n=Math.min(12,Math.max(1,Math.round(d.n))),transom=Math.max(0,Number(it.transomH)||0)/1000;
- const framed=/frame|glass|panel|louvre/i.test(pat),ribbed=/rib/i.test(pat),isGlass=/glass/i.test(pat),isLouvre=/louvre/i.test(pat);
+ const framed=scheduleGlass||/frame|glass|panel|louvre/i.test(pat),ribbed=!isAluminium&&/rib/i.test(pat),isGlass=scheduleGlass||/glass/i.test(pat),isLouvre=/louvre/i.test(pat);
  const awning=/กระทุ้ง/.test(it.type);
  const previewSwing=s.host.querySelector('[data-d3-swing]')?.value||(it.swing==='OUT'?'OUT':'IN');
  s.previewSwing=previewSwing;
@@ -9526,12 +9661,12 @@ function d3Build(it){
  dims.add(d3Label(T,`W ${f1(d.w)} mm`,0,y-.045,z,.55));dims.add(d3Label(T,`H ${f1(d.h)} mm`,x+.02,h/2,z,.55));
  // Product-only view: no wall, room, floor or grid geometry is created.
  s.room=null;
- const ref=prodImg(pr),canAnimate=s.motion!=='none';
+ const ref=isAluminium?'':prodImg(pr),canAnimate=s.motion!=='none';
  s.host.querySelector('[data-d3-info]').innerHTML=`<div class="d3-spec"><span>ช่องเปิด (${d.measured?'วัดจริง':'ตามแบบ'})</span><b>${f1(d.w)} × ${f1(d.h)} มม.</b><span>บานต่อบาน</span><b>${isOpenOnly(it)?'ไม่มีบาน':`${f1(d.leafWR)} × ${f1(d.leafH)} × ${f1(d.lt)} มม.`}</b><span>วงกบ</span><b>${d.leafOnly||it.jamb==='NONE'?'ไม่มี':`${f1(d.jW)} × ${f1(d.jH)} มม.`}</b><span>จำนวน</span><b>${n} บาน / ${esc(it.qty||1)} ชุด</b><span>ทิศเปิด</span><b>${esc(SWING[it.swing]||'ยังไม่ยืนยัน')}</b></div>${!canAnimate?`<p class="d3-note">${fixed?'รายการนี้เป็นบานติดตายหรือช่องโล่ง':'ยังไม่ยืนยันทิศเปิด จึงแสดงเฉพาะรูปทรงขณะปิด'}</p>`:''}${ref?`<details class="d3-reference"><summary>เทียบรูปสินค้าจริง · ${esc(pr.code)}</summary><img src="${esc(ref)}" alt="รูปสินค้าจริง ${esc(pr.code)}"></details>`:''}<p class="d3-note">โมเดลจำลองจากขนาดและกลุ่มรุ่นสินค้า · ขอบบาน หน้าตัดวงกบ มือจับ และบานพับเป็นรายละเอียดจำลอง ยังไม่ใช่รุ่นอุปกรณ์หรือแบบหน้าตัดที่ตรวจอนุมัติ · ลายไม้และสีเป็นภาพประกอบ รายละเอียดผลิตยึดแบบอนุมัติ${it.approach==='custom'?' · งานตามแบบพิเศษแสดงรูปทรงเบื้องต้นเท่านั้น':''}</p>`;
  s.host.querySelector('[data-d3-title]').textContent=`${it.code} · ${it.location||it.type}`;
  s.host.querySelector('[data-d3-model]').textContent=customValid?cdSummary(it):pr?`${pr.code} · ${pr.name}`:'ยังไม่เลือกรุ่น · รูปทรงพื้นฐาน';
  const range=s.host.querySelector('[data-d3-open]');range.disabled=!canAnimate;s.host.querySelector('[data-d3-toggle]').disabled=!canAnimate;
- d3Move(0);d3ApplyParts();d3UpdatePrice(it);d3View();d3Resize();hfRender(s);
+ d3Move(0);d3ApplyParts();d3UpdatePrice(it);d3View();d3Resize();hfRender(s);d3MaterialControls(s,it);
 }
 /* Curated examples, verified against official Thai product pages 2026-10-22. */
 const HF_CATALOG=[
@@ -9628,6 +9763,7 @@ function hfSave(s=D3){if(!s||s.fileBusy||s.sourceMode==='saved')return false;con
  persistProject(p);s.hfDirty=false;hfRender(s);s.host.querySelector('[data-hf-state]').textContent='บันทึกตัวเลือกเบื้องต้นแล้ว · ตรวจแบบติดตั้งก่อนสั่ง';return true;
 }
 
+function d3MaterialControls(s,it=s.editDraft){const alu=it?.materialSpec?.status==='matched'&&it?.materialSpec?.category==='aluminium';s.host.querySelectorAll('[data-d3-finish],[data-d3-colour]').forEach(x=>x.disabled=!!(alu||s.fileBusy||s.sourceMode==='saved'));const h=s.host.querySelector('.d3-finish-picker>b');if(h)h.textContent=alu?'วงกบอลูมิเนียม · ผิวสีเงินจำลองตาม Schedule':'เลือกสีไม้'}
 function d3Open(id){
  const p=cur(),it=S.draft?.id===id?S.draft:p?.items.find(i=>i.id===id);if(!it)return;
  const d=shop(it);if(!d||d.w<=0||d.h<=0||d.leafW<=0||d.leafH<=0){toast('กรุณากรอกขนาดช่องเปิดให้ถูกต้องก่อนดู 3D');return}
@@ -9678,12 +9814,12 @@ document.addEventListener('keydown',e=>{
 
 /* Immutable GLB snapshots: private Storage + independent per-item history. */
 const MF_BUCKET='door-models',MF_LIMIT=25*1024*1024;
-function mfSpec(it,s=D3){return {schema:1,units:'metres',finish_palette:'champaca-7-20261022',render_profile:'visual-v36-image-fitting',fittings:hfSnapshot(it),dimensions:shop(it),fit:fitOf(it),pattern:prodBy(it.catalog)?.pat||'flushV',custom:cdValue(it),item:Object.fromEntries(['catalog','jamb','swing','handing','type','leaves','transomH','handleH','grooveW','grooveNV','grooveNH','grooveV1','grooveV2','grooveH1','grooveH2','grooveMode'].map(k=>[k,it[k]??null])),colour:s.host.querySelector('[data-d3-colour]').value}}
+function mfSpec(it,s=D3){return {schema:1,units:'metres',finish_palette:'champaca-7-20261022',render_profile:'visual-v37-evidence',materials:it.materialSpec||null,fittings:hfSnapshot(it),dimensions:shop(it),fit:fitOf(it),pattern:prodBy(it.catalog)?.pat||'flushV',custom:cdValue(it),item:Object.fromEntries(['catalog','jamb','swing','handing','type','leaves','transomH','handleH','grooveW','grooveNV','grooveNH','grooveV1','grooveV2','grooveH1','grooveH2','grooveMode'].map(k=>[k,it[k]??null])),colour:it.materialSpec?.status==='matched'&&it.materialSpec?.category==='aluminium'?'schedule-aluminium':s.host.querySelector('[data-d3-colour]').value}}
 function mfCanonical(v){if(Array.isArray(v))return '['+v.map(mfCanonical).join(',')+']';if(v&&typeof v==='object')return '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+mfCanonical(v[k])).join(',')+'}';return JSON.stringify(v)}
 async function mfHash(spec){if(!crypto.subtle)throw Error('กรุณาเปิดด้วย HTTPS หรือเบราว์เซอร์ที่รองรับการบันทึกไฟล์');return [...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(mfCanonical(spec))))].map(x=>x.toString(16).padStart(2,'0')).join('')}
 function mfLogged(){return !!(SB.client&&SB.user&&SB.profile?.active)}
 function mfStatus(s,msg){if(D3===s)s.host.querySelector('[data-mf-state]').textContent=msg}
-function mfBusy(s,b){s.fileBusy=b;if(D3!==s)return;s.host.querySelectorAll('[data-mf],[data-d3="close"],[data-d3-item],[data-d3-colour],[data-d3-finish],[data-cd-editor] button,[data-cd-editor] input,[data-cd-editor] select,[data-hf-panel] input,[data-hf-panel] select,[data-hf-panel] button').forEach(el=>el.disabled=b);if(!b&&s.sourceMode==='saved')mfSavedControls(s,true);hfRender(s)}
+function mfBusy(s,b){s.fileBusy=b;if(D3!==s)return;s.host.querySelectorAll('[data-mf],[data-d3="close"],[data-d3-item],[data-d3-colour],[data-d3-finish],[data-cd-editor] button,[data-cd-editor] input,[data-cd-editor] select,[data-hf-panel] input,[data-hf-panel] select,[data-hf-panel] button').forEach(el=>el.disabled=b);if(!b&&s.sourceMode==='saved')mfSavedControls(s,true);hfRender(s);d3MaterialControls(s)}
 function mfPanel(){return `<section class="mf-panel"><b>ไฟล์ 3D ของบานนี้</b><p class="d3-note">เก็บภาพโมเดลขณะปิดพร้อมสีตัวอย่าง · ผูกกับโครงการ รหัสบาน และ Version · แก้รายละเอียดต่อได้ในโมเดลปัจจุบัน</p><div class="row"><button class="btn sm primary" data-mf="save">บันทึก 3D บนคลาวด์</button><button class="btn sm" data-mf="local">ดาวน์โหลด GLB ปัจจุบัน</button></div><div class="row" style="margin-top:8px"><button class="btn sm" data-mf="refresh">เรียกดูไฟล์ที่บันทึก</button><button class="btn sm" data-mf="current" hidden>กลับโมเดลปัจจุบัน</button></div><p data-mf-state role="status" aria-live="polite"></p><div data-mf-list></div></section>`}
 async function mfRefresh(s=D3){if(!s)return;if(!mfLogged()){mfStatus(s,'เข้าสู่ระบบเพื่อบันทึกและเรียกดูไฟล์บนคลาวด์ · ดาวน์โหลด GLB ลงเครื่องได้');return}mfStatus(s,'กำลังเรียกรายการไฟล์…');try{const {data,error}=await SB.client.from('door_model_files').select('*').eq('project_id',s.projectId).eq('item_id',s.editDraft.id).order('created_at',{ascending:false}).limit(100);if(error)throw error;if(D3!==s)return;s.modelFiles=data||[];const fingerprint=await mfHash(mfSpec(s.editDraft,s));if(D3!==s)return;s.host.querySelector('[data-mf-list]').innerHTML=s.modelFiles.map(f=>`<div class="mf-file"><b>Version ${esc(f.version)} · ${esc(f.file_name)}</b><small>${esc(new Date(f.created_at).toLocaleString('th-TH'))} · ${(f.byte_size/1024/1024).toFixed(2)} MB<br>${f.fingerprint===fingerprint?'ตรงกับขนาด ลาย และสีปัจจุบัน':'บันทึกจากข้อมูลหรือสีต่างจากปัจจุบัน'}</small><div class="row"><button class="btn sm" data-mf="view" data-mf-id="${esc(f.id)}">ดูไฟล์ 3D</button><button class="btn sm" data-mf="download" data-mf-id="${esc(f.id)}">ดาวน์โหลด</button></div></div>`).join('');mfStatus(s,s.modelFiles.length?`พบ ${s.modelFiles.length} ไฟล์${s.modelFiles.length===100?'ล่าสุด':''} · ไฟล์เก่าคงเดิมเมื่อแก้แบบ`:'ยังไม่มีไฟล์ที่บันทึกสำหรับบานนี้')}catch(e){mfStatus(s,'เรียกรายการไม่สำเร็จ: '+(e.message||e))}}
 async function mfExport(s=D3){if(!s?.model||s.sourceMode==='saved')throw Error('กรุณากลับโมเดลปัจจุบันก่อน');if(cdErrors(s.editDraft).length)throw Error('กรุณาแก้ขนาดหรือตำแหน่งช่องให้ถูกต้องก่อน');const spec=mfSpec(s.editDraft,s),copy=s.model.clone(true),remove=[];copy.traverse(o=>{if(o.userData.previewOnly)remove.push(o);if(o.userData.component){o.visible=true;if(o.userData.component==='leaf')o.position.z=0}if(o.userData.doorMotion){o.rotation.set(0,0,0);o.position.x=o.userData.doorMotion.x;if(Number.isFinite(o.userData.doorMotion.z))o.position.z=o.userData.doorMotion.z}});remove.forEach(o=>o.removeFromParent());copy.name='ChampacaDoor';copy.userData={champaca:{projectId:s.projectId,itemId:s.editDraft.id,code:s.editDraft.code,version:s.projectVersion,motion:s.motion,spec}};copy.updateMatrixWorld(true);const bytes=await new window.Champaca3D.GLTFExporter().parseAsync(copy,{binary:true,onlyVisible:true});if(!(bytes instanceof ArrayBuffer)||bytes.byteLength>MF_LIMIT)throw Error('ไฟล์เกินขนาดที่รองรับ 25 MB');return {blob:new Blob([bytes],{type:'model/gltf-binary'}),spec,fingerprint:await mfHash(spec)}}
