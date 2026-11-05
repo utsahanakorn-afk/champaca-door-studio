@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Champaca Door Studio V3.11</title>
+<title>Champaca Door Studio V3.12.1</title>
 <style>
 /* Bundled Noto Sans Thai: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/thai)
 
@@ -306,6 +306,7 @@ label.big:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--acc
 .a3 .tb .sig img{position:absolute;left:50%;top:14px;transform:translateX(-50%);max-height:48px;max-width:220px}
 .a3 .tb .sig .who{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:10.5px}
 .a3 .tb .stamp{text-align:center;font-size:15px;padding:8px 4px;line-height:1.15}
+.a3 text.ovl{fill:#C0392B!important;font-weight:700}.a3 .ovl-warn{position:absolute;left:50%;top:6px;transform:translateX(-50%);background:#C0392B;color:#fff;font:600 13px var(--sans,sans-serif);padding:5px 12px;border-radius:6px;z-index:5}@media print{.a3 .ovl-warn{display:none}}
 .a3 .note{position:absolute;left:34px;bottom:4px;font-size:10px;line-height:1.3}
 .a3 .ver-flag{position:absolute;right:320px;top:44px;border:2px solid #A63A2E;color:#A63A2E;font-weight:700;padding:4px 10px;font-size:14px;transform:rotate(-3deg);background:#fff}
 .paper{width:794px;min-height:1123px;margin:0 auto;background:#fff;color:#1b1f1d;padding:48px 52px;font-family:var(--sans);font-size:12.5px;line-height:1.5;box-shadow:0 2px 16px rgba(0,0,0,.12)}
@@ -665,6 +666,13 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outli
 [data-approval-model] .model-photo-stage{padding:8px 22px 26px}
 [data-approval-model] .model-photo-dimensioned{height:100%;max-height:none;max-width:calc(100% - 28px)}
 [data-approval-model] .model-dimensions{gap:6px}
+
+
+/* V3.11.1: reference-page identification only. */
+.sap-reference-details{display:grid;grid-template-columns:150px minmax(0,1fr) 150px;gap:16px;padding:10px 0 12px;font-size:12px}
+.sap-reference-details>div{min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:3px}
+.sap-reference-details span{color:#6D6861;font-size:10px}
+.sap-reference-details b{font-weight:600}
 
 </style>
 
@@ -5512,9 +5520,9 @@ function counts(p){const it=p.items;return {types:it.length,sets:it.reduce((s,i)
 const INK="#111",SOFT="#666",DIMC="#1d4fd1";let LNC=INK;
 function Rr(x,y,w,h,a=""){return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(w,0).toFixed(1)}" height="${Math.max(h,0).toFixed(1)}" fill="none" stroke="${INK}" stroke-width=".8" ${a}/>`}
 function Ln(x1,y1,x2,y2,a=""){return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" ${/stroke=/.test(a)?"":`stroke="${LNC}"`} stroke-width=".7" ${a}/>`}
-function Tx(x,y,t,o={}){const sz=o.size||10;const rot=o.rot?` transform="rotate(${o.rot} ${x.toFixed(1)} ${y.toFixed(1)})"`:"";return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${sz}" text-anchor="${o.anchor||"middle"}" fill="${o.fill||INK}" font-family="IBM Plex Sans Thai,Champaca Thai,Tahoma,sans-serif" ${o.weight?`font-weight="${o.weight}"`:""}${rot}>${esc(t)}</text>`}
-function dimH(x1,x2,y,label,col){const t=3,C=col||INK;LNC=C;const r=`<g stroke="${C}" stroke-width=".6">${Ln(x1,y,x2,y)}${Ln(x1,y-5,x1,y+5)}${Ln(x2,y-5,x2,y+5)}${Ln(x1-t,y+t,x1+t,y-t)}${Ln(x2-t,y+t,x2+t,y-t)}</g>`;LNC=INK;return r+Tx((x1+x2)/2,y-4,label,{size:9.5,fill:C})}
-function dimV(y1,y2,x,label,col){const t=3,C=col||INK;LNC=C;const r=`<g stroke="${C}" stroke-width=".6">${Ln(x,y1,x,y2)}${Ln(x-5,y1,x+5,y1)}${Ln(x-5,y2,x+5,y2)}${Ln(x-t,y1+t,x+t,y1-t)}${Ln(x-t,y2+t,x+t,y2-t)}</g>`;LNC=INK;return r+Tx(x-4,(y1+y2)/2,label,{size:9.5,rot:-90,fill:C})}
+function Tx(x,y,t,o={}){const sz=o.size||10;const rot=o.rot?` transform="rotate(${o.rot} ${x.toFixed(1)} ${y.toFixed(1)})"`:"";return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${sz}" text-anchor="${o.anchor||"middle"}" fill="${o.fill||INK}" font-family="IBM Plex Sans Thai,Champaca Thai,Tahoma,sans-serif" ${o.weight?`font-weight="${o.weight}"`:""}${o.halo===false?"":` stroke="#fff" stroke-width="${o.haloW||2.6}" stroke-linejoin="round" paint-order="stroke"`}${o.dim?` data-dim="${o.dim}"`:""}${rot}>${esc(t)}</text>`}
+function dimH(x1,x2,y,label,col){const t=3,C=col||INK;LNC=C;const r=`<g stroke="${C}" stroke-width=".6">${Ln(x1,y,x2,y)}${Ln(x1,y-5,x1,y+5)}${Ln(x2,y-5,x2,y+5)}${Ln(x1-t,y+t,x1+t,y-t)}${Ln(x2-t,y+t,x2+t,y-t)}</g>`;LNC=INK;return r+Tx((x1+x2)/2,y-4,label,{size:9.5,fill:C,dim:`h:${Math.min(x1,x2).toFixed(1)}:${Math.max(x1,x2).toFixed(1)}:${y.toFixed(1)}`})}
+function dimV(y1,y2,x,label,col){const t=3,C=col||INK;LNC=C;const r=`<g stroke="${C}" stroke-width=".6">${Ln(x,y1,x,y2)}${Ln(x-5,y1,x+5,y1)}${Ln(x-5,y2,x+5,y2)}${Ln(x-t,y1+t,x+t,y1-t)}${Ln(x-t,y2+t,x+t,y2-t)}</g>`;LNC=INK;return r+Tx(x-4,(y1+y2)/2,label,{size:9.5,rot:-90,fill:C,dim:`v:${Math.min(y1,y2).toFixed(1)}:${Math.max(y1,y2).toFixed(1)}:${x.toFixed(1)}`})}
 
 /* leaf pattern inside a leaf rectangle (px); k = px per mm */
 function leafPattern(x,y,w,h,k,pr,it){
@@ -5564,7 +5572,7 @@ function fixPanelSVG(it,d,k,X,Y,opt={}){
   if(hR>0)o+=`<rect x="${x.toFixed(1)}" y="${yR.toFixed(1)}" width="${w.toFixed(1)}" height="${hR.toFixed(1)}" fill="#e6dfd4" stroke="${INK}" stroke-width=".8"/>`;
   o+=Rr(x,y,w,h,`stroke-width="1"`)+leafPattern(x,y,w,h,k,fixPatternProduct(it,prodBy(it.catalog)),it);
   const sz=Math.max(7,Math.min(13,h*.32)),tw=sz*2.4;
-  o+=`<rect x="${(x+4).toFixed(1)}" y="${(y+h-sz-6).toFixed(1)}" width="${tw.toFixed(1)}" height="${(sz+4).toFixed(1)}" fill="#fff" opacity=".9"/>`+Tx(x+4+tw/2,y+h-5,"FIX",{size:sz,weight:700});
+  o+=`<rect x="${(x+w/2-tw/2).toFixed(1)}" y="${(y+h/2-sz*.75).toFixed(1)}" width="${tw.toFixed(1)}" height="${(sz*1.5).toFixed(1)}" fill="#fff" opacity=".92"/>`+Tx(x+w/2,y+h/2+sz*.35,"FIX",{size:sz,weight:700});
   return o;
 }
 /* front elevation of one opening at origin (fx = x of liner-left, fy = floor y) ; mirror for BACK */
@@ -5624,10 +5632,10 @@ function shopSVG(it,opt={}){
   const nL=door0?(hasPeep(it)?2:1):0,nR=(isOpenOnly(it)?0:1)+(it.jamb!=="NONE"?1:0)+(d.liner?1:0),gp=C?24:30;
   const sjd=Math.max(depth,d.jambD);
   const fixedW=30+30+(22+gp*nL)+(20+gp*nR)+40+56+(C?10:40);
-  const base=C?84:84;
+  const base=C?84:112;
   let sc=SCALES[SCALES.length-1],sc2=sc;
   for(const c of SCALES){const q=PX/c;
-    const c2=SCALES.find(z=>z>=c*1.3&&d.jW*PX/z<=(C?170:260))||SCALES[SCALES.length-1];const q2=PX/c2;
+    const c2=SCALES.find(z=>z>=c*(d.subH>3000?2:1.3)&&d.jW*PX/z<=(C?170:260))||SCALES[SCALES.length-1];const q2=PX/c2;
     const topEnd=base+(depth+d.leafW)*q2+86;const avail=Math.min(fy-topEnd-58,C?9999:625);
     if(d.subH*q<=avail&&(d.w+d.subW+sjd)*q<=W-fixedW){sc=c;sc2=c2;break}}
   const k=PX/sc,k2=PX/sc2;
@@ -5644,23 +5652,30 @@ function shopSVG(it,opt={}){
   const X=mm=>fx+(mm+s.subSide)*k,Y=mm=>fy-mm*k;const frontL=X(-s.subSide),frontR=X(d.jW+s.subSide);
   o+=elevation(it,d,k,fx,fy);
   const topY=Y(Math.max(d.subH,d.h));
-  if(d.liner)o+=dimH(frontL,frontR,topY-42,`${f1(d.subW)} ขนาดรวมซับวงกบ*`,B);
-  if(it.jamb!=="NONE")o+=dimH(X(0),X(d.jW),topY-18,`${f1(d.jW)} ความกว้างวงกบ`,B);
+  /* ตัวเลขบนรูปสั้น: ค่า + เลขจุดตรวจ ①–⑮ (ความหมายอยู่ในบรรทัดอธิบายและรายการตรวจ) */
+  const CN=["","①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮"];const used=new Set();const lab=(v,n,suf="")=>{used.add(n);return `${v} ${CN[n]}${suf}`};
+  if(d.liner)o+=dimH(frontL,frontR,topY-46,lab(f1(d.subW),4,"*"),B);
+  if(it.jamb!=="NONE")o+=dimH(X(0),X(d.jW),topY-20,lab(f1(d.jW),5),B);
   if(!isOpenOnly(it)){const l0=X(d.x0);
-    o+=dimH(l0,l0+d.leafW*k,fy+22,`${f1(d.leafW)} ความกว้าง${isWindow(it)?"บาน":"ประตู"}`,B);
-    if(d.leafWR!==d.leafW&&!C)o+=dimH(l0,l0+d.leafWR*k,fy+46,`${f1(d.leafWR)} รวมบังใบ`,B)}
+    o+=dimH(l0,l0+d.leafW*k,fy+24,lab(f1(d.leafW),12),B);
+    if(d.leafWR!==d.leafW&&!C)o+=dimH(l0,l0+d.leafWR*k,fy+48,lab(f1(d.leafWR),12," รวมบังใบ"),B)}
   let rx=frontR+20;const gap=gp;
-  if(!isOpenOnly(it)){o+=dimV(Y(d.bottom),Y(d.bottom+d.leafH),rx,`${f1(d.leafH)} ความสูง${isWindow(it)?"บาน":"ประตู"}`,B);rx+=gap}
-  if(it.jamb!=="NONE"){o+=dimV(fy,Y(d.jH),rx,`${f1(d.jH)} ความสูงวงกบ`,B);rx+=gap}
-  if(d.liner){o+=dimV(fy,Y(d.subH),rx,`${f1(d.subH)} ขนาดรวมซับ*`,B);rx+=gap}
+  if(!isOpenOnly(it)){o+=dimV(Y(d.bottom),Y(d.bottom+d.leafH),rx,lab(f1(d.leafH),13),B);
+    const trH=Number(it.transomH)||0;if(trH>0&&!d.leafOnly){const rail=Number(fitOf(it).transomRail)||0;o+=dimV(Y(d.bottom+d.leafH+rail),Y(d.bottom+d.leafH+rail+trH),rx,`${trH} FIX`,B)}rx+=gap}
+  if(it.jamb!=="NONE"){o+=dimV(fy,Y(d.jH),rx,lab(f1(d.jH),14),B);rx+=gap}
+  if(d.liner){o+=dimV(fy,Y(d.subH),rx,lab(f1(d.subH),15,"*"),B);rx+=gap}
   let lx=frontL-22;
   if(door&&!isOpenOnly(it)&&!isSlide(it)&&!isFold(it)){const hh=Number(val(it.handleH,s.handleH));
-    o+=dimV(fy,Y(hh),lx,`${hh} มือจับจาก FFL`,B);lx-=gap;
-    if(hasPeep(it)){const px=X(d.x0+d.leafW/2);o+=`<circle cx="${px.toFixed(1)}" cy="${Y(s.peepH).toFixed(1)}" r="3" fill="none" stroke="${INK}"/>`+Ln(px,Y(s.peepH),lx,Y(s.peepH),`stroke="${B}" stroke-width=".4" stroke-dasharray="3 3"`)+dimV(fy,Y(s.peepH),lx,`${s.peepH} ตาแมวจาก FFL`,B);lx-=gap}}
-  o+=Tx(frontR+6,fy+14,"FFL ±0.00",{size:9,anchor:"start",fill:B});
+    o+=dimV(fy,Y(hh),lx,lab(hh,11),B);lx-=gap;
+    if(hasPeep(it)){const px=X(d.x0+d.leafW/2);o+=`<circle cx="${px.toFixed(1)}" cy="${Y(s.peepH).toFixed(1)}" r="3" fill="none" stroke="${INK}"/>`+Ln(px,Y(s.peepH),lx,Y(s.peepH),`stroke="${B}" stroke-width=".4" stroke-dasharray="3 3"`)+dimV(fy,Y(s.peepH),lx,`${s.peepH} ตาแมว`,B);lx-=gap}}
+  o+=Tx(frontL-6,fy+14,"FFL ±0.00",{size:9,anchor:"end",fill:B});
   const hist=(it.dimHist||[]).slice(-1)[0];
-  if(hist&&hist.w&&hist.h){o+=Rr(X(-s.openGap/2),Y(hist.h),hist.w*k,hist.h*k,`stroke="#C0392B" stroke-dasharray="6 4" stroke-width="1"`)+Tx(X(-s.openGap/2),Y(hist.h)-6,`▲ แบบปรับจาก ${hist.w}×${hist.h} (${hist.date})`,{size:9,anchor:"start",fill:"#C0392B"})}
+  if(hist&&hist.w&&hist.h){o+=Rr(X(-s.openGap/2),Y(hist.h),hist.w*k,hist.h*k,`stroke="#C0392B" stroke-dasharray="6 4" stroke-width="1"`)+`<path d="M${(X(-s.openGap/2)-2).toFixed(1)} ${(Y(hist.h)-3).toFixed(1)} l7 -12 l7 12 z" fill="#fff" stroke="#C0392B" stroke-width="1"/>`+Tx(X(-s.openGap/2)+5,Y(hist.h)-5,"1",{size:7.5,weight:700,fill:"#C0392B",halo:false})}
   o+=Tx((frontL+frontR)/2,fy+capY,"FRONT — มองจากภายนอก",{size:C?12:14,weight:600})+Tx((frontL+frontR)/2,fy+capY+15,`มาตราส่วน 1 : ${sc}`,{size:9,fill:SOFT});
+  {const NM={4:"กว้างรวมซับ*",5:"กว้างวงกบ",11:"มือจับจาก FFL",12:"กว้างบาน",13:"สูงบาน",14:"สูงวงกบ",15:"สูงรวมซับ*"};
+   const parts=[...used].sort((a,b)=>a-b).map(n=>`${CN[n]} ${NM[n]}`);parts.unshift(`${CN[1]}${CN[2]}${CN[3]} ช่องปูน สูง·หนา·กว้าง`);
+   if(hist&&hist.w)parts.push(`▲1 แบบปรับจาก ${hist.w}×${hist.h} (${hist.date})`);
+   o+=Tx(C?W/2:20,C?H-8:80,parts.join(" · ")+" · หน่วย mm",{size:C?8.5:10,fill:SOFT,anchor:C?"middle":"start"})}
   /* ---------- small key views ---------- */
   const small=(cx,y,t,sca)=>Tx(cx,y,t,{size:C?10.5:12,weight:600})+Tx(cx,y+14,sca?`มาตราส่วน 1 : ${sc}`:`ย่อ 1 : ${sc2}`,{size:8.5,fill:SOFT});
   /* opening (ช่องปูน) — bottom-left */
@@ -6706,7 +6721,8 @@ async function runAI(){
     aiCtl.signal.throwIfAborted();
     const catalog=products().map(p=>({code:p.code,name:p.name}));
     const base={mode:"drawing",action:"drawing",project_id:cur()?.id||null,project_name:cur()?.name||"",catalog,architect_id:archId,source:"champaca-door-studio",read_mode:floorOnly?"floor_only":"auto",version:"ai-drawing-v37-material-evidence",row_per_opening:true,material_matching:true};
-    const out=await readDrawingPagesAI(base,prompt+V37_MATERIAL_PROMPT+"\nภาพทั้งหมดเป็นเอกสารชุดเดียวกัน ให้อ่านร่วมกัน ถ้ามี Door Schedule หรือ Detail ให้เทียบกับ Floor Plan หากไม่มีให้อ่าน Floor Plan ที่มีได้เลย ช่องเปิดที่มีในแปลนแล้วไม่ต้องคืนซ้ำเป็นรายการจาก Schedule หากข้อมูลขัดกันให้ระบุใน notes อ้างอิง ref.page แบบเริ่มที่ 0 ตาม page_info.index",selPages,pageInfo,floorOnly,aiCtl.signal,tagInfo,cur().drawingTextEvidence||{});
+    const exText=await reviewedExamplesText(archId);
+    const out=await readDrawingPagesAI(base,prompt+exText+V37_MATERIAL_PROMPT+"\nภาพทั้งหมดเป็นเอกสารชุดเดียวกัน ให้อ่านร่วมกัน ถ้ามี Door Schedule หรือ Detail ให้เทียบกับ Floor Plan หากไม่มีให้อ่าน Floor Plan ที่มีได้เลย ช่องเปิดที่มีในแปลนแล้วไม่ต้องคืนซ้ำเป็นรายการจาก Schedule หากข้อมูลขัดกันให้ระบุใน notes อ้างอิง ref.page แบบเริ่มที่ 0 ตาม page_info.index",selPages,pageInfo,floorOnly,aiCtl.signal,tagInfo,cur().drawingTextEvidence||{});
     aiCtl.signal.throwIfAborted();
     const result=out.result;
     if(!Array.isArray(result.items))throw new Error("AI ส่งผลไม่ครบ กรุณาลองใหม่");
@@ -6717,6 +6733,7 @@ async function runAI(){
     result.notes=projectMeta.notes;
     {const pj=cur();if(pj&&out.architect&&out.architect.id&&!pj.architectId){pj.architectId=out.architect.id;pj.architectAuto=true;persistProject(pj)}}
     const items=(result&&Array.isArray(result.items)?result.items:[]).map(prepareDrawingEvidence).map(r=>addDrawingRemark(floorOnly?prepareFloorPlanItem(r):r)).map(r=>({on:true,code:String(r.code||"").trim()||"?",kind:r.kind==="window"?"window":"door",location:r.location||"",storey:r.storey||"",type:r.type,needsSchedule:!!r.needsSchedule,floorPlanOnly:floorOnly,leaves:r.leaves,qty:r.qty,dw:num(r.width_mm),dh:num(r.height_mm),aiDim:r.ai_dim||null,dimFrom:r.dim_from||null,pattern:r.pattern||"",material:r.material||"",materialSpec:r.materialSpec||drawingMaterialSpec(r),notes:drawingShortNote(r),aiNotes:r.notes||"",conf:typeof r.confidence==="number"?r.confidence:null,est:!!r.estimated,untagged:!!r.untagged||!String(r.code||"").trim(),swing:r.swing==="out"?"OUT":r.swing==="in"?"IN":"",ref:r.ref&&typeof r.ref==="object"?r.ref:null,site:!!r.site,sourceJobId:r._jobId||null,sourceRefs:r.sourceRefs||null,mw3:Array.isArray(r.measure_w)?r.measure_w.map(num):null,mh2:Array.isArray(r.measure_h)?r.measure_h.map(num):null,wall:num(r.wall_mm),floor:num(r.floor_mm)||0,th:["none","rebate","flush"].includes(r.threshold)?r.threshold:null,leafT:num(r.leaf_t),checker:r.checker||"",cdate:r.check_date||"",aiOriginal:r._source||{code:String(r.code||"").trim()||"?",location:r.location||"",storey:r.storey||"",type:r.type||"",leaves:r.leaves,qty:r.qty,width_mm:num(r.width_mm),height_mm:num(r.height_mm),pattern:r.pattern||"",material:r.material||"",confidence:typeof r.confidence==="number"?r.confidence:null,estimated:!!r.estimated,notes:r.notes||""}})).map(r=>{if(r.site){const ws=(r.mw3||[]).filter(x=>x!=null),hs=(r.mh2||[]).filter(x=>x!=null);r.mw=ws.length?Math.min(...ws):null;r.mh=hs.length?Math.min(...hs):null}return r});
+    fillSizesFromKnown(items,cur());
     items.forEach(r=>{const why=[r.qty==null&&"จำนวนชุด",r.leaves==null&&"จำนวนบาน",r.type==="รอยืนยัน"&&"ประเภทการเปิด",!Array.isArray(r.ref?.box)&&"ตำแหน่งในแบบ"].filter(Boolean);if(why.length){r.on=false;r.offReason="ขาด"+why.join(", ")}});
     let nu=0;items.forEach(r=>{if(r.untagged){r.on=false;r.code=(floorOnly?"TEMP-":"N")+String(++nu).padStart(2,"0")}});
     // What the review table showed before any human edit; kbAutoSaveExamples compares against this, not the raw AI JSON (types and sizes are normalised above).
@@ -7317,11 +7334,22 @@ async function cropSave(){
   catch(e){toast("ตัดภาพไม่สำเร็จ: "+(e.message||e.code))}
 }
 /* AI-assisted: crop each item's reference from the page the AI found it on */
+function drawingReferenceCrop(box,kind='plan'){
+ const [x,y,x1,y1]=box,px=kind==='plan'?Math.max(.01,(x1-x)*.5):.01,py=kind==='plan'?Math.max(.01,(y1-y)*.5):.01;
+ return [Math.max(0,x-px),Math.max(0,y-py),Math.min(1,x1+px),Math.min(1,y1+py)];
+}
 async function autoRefs(items,pages){
  let n=0;for(const {it,ref,scheduleRef} of items){
+  const previousPlan=it.planEvidence;
   it.planEvidence=drawingSourceRecord(ref,pages);it.scheduleEvidence=drawingSourceRecord(scheduleRef,pages);it.referenceError='';
   for(const [kind,r] of [['plan',ref],['schedule',scheduleRef]]){const pg=pages[r?.page];if(!pg?.url||!drawingRefValid(r))continue;
-   try{const [x,y,x1,y1]=r.box,pad=.01,x0=Math.max(0,x-pad),y0=Math.max(0,y-pad);const image=await storeBlob(await cropBlob(pg.url,{x:x0,y:y0,w:Math.min(1,x1+pad)-x0,h:Math.min(1,y1+pad)-y0}));it[kind==='plan'?'ref':'scheduleImage']=image;n++}
+   try{const crop=drawingReferenceCrop(r.box,kind),[x0,y0,x1,y1]=crop;const image=await storeBlob(await cropBlob(pg.url,{x:x0,y:y0,w:x1-x0,h:y1-y0}));
+    if(kind==='plan'){
+     if(it.pins?.length){const same=previousPlan&&previousPlan.object_path===it.planEvidence.object_path&&JSON.stringify(previousPlan.box)===JSON.stringify(r.box),old=previousPlan?.crop_box||drawingReferenceCrop(r.box,'schedule');
+      it.pins=same?it.pins.map(p=>({...p,x:(old[0]+p.x*(old[2]-old[0])-x0)/(x1-x0),y:(old[1]+p.y*(old[3]-old[1])-y0)/(y1-y0)})):[];}
+     it.planEvidence.crop_box=crop;
+    }
+    it[kind==='plan'?'ref':'scheduleImage']=image;n++}
    catch(e){it.referenceError=[it.referenceError,kind+': '+(e.message||e)].filter(Boolean).join(' · ')}
   }
  }return n;
@@ -7606,7 +7634,8 @@ function sapPaper(p,it,idx,total){
   const rows=[["วัสดุวงกบ",it.materialSpec?.frame||"รอยืนยัน"],["วัสดุบาน",it.materialSpec?.panel||it.material||"รอยืนยัน"],["หลักฐานวัสดุ",it.materialSpec?.status==='matched'?it.materialSpec.source_code+' · Door Schedule':'รอยืนยัน / ผลอ่านเดิม'],["รหัส / ชั้น",`${it.code} · ${it.storey||"-"}`],["ห้อง / ตำแหน่ง",it.location||"-"],["W × H จากแบบ",it.dw?`${it.dw} × ${it.dh} mm`:"-"],["W × H วัดช่องปูน",it.mw!=null?`${it.mw} × ${it.mh} mm`:"ยังไม่วัด"],
     ["ความหนาผนัง / วงกบลึก",`${it.depth??"-"} / ${jambDepth(it)} mm`],["±Floor / ธรณี",`${it.floorFinish||0} mm · ${TH_TYPES[thType(it)]}`],["ขนาดวงกบ",sd&&!sd.leafOnly?`${f1(sd.jW)} × ${f1(sd.jH)} mm`:"-"],
     ["ขนาดบาน",sd&&!isOpenOnly(it)?`${sd.lt} × ${f1(sd.leafWR)} × ${f1(sd.leafH)}${sd.n>1?` × ${sd.n}`:""}`:"-"],["ทิศเปิด",dinText(it)],["ที่มาของขนาด",it.mw!=null?"วัดหน้างาน":"แบบลูกค้า (ยังไม่มีขนาดวัดหน้างาน)"]];
-  const notes=[it.note,...(it.pins||[]).map((x,i)=>`จุด ${i+1}: ${x.note||"-"}`)].filter(Boolean);const open=openIssues(it);
+  const hz=(it.dimHist||[]).slice(-1)[0];
+  const notes=[it.note,...(it.pins||[]).map((x,i)=>`จุด ${i+1}: ${x.note||"-"}`),hz&&hz.w?`▲1 ขนาดแบบปรับจาก ${hz.w}×${hz.h} เป็น ${it.dw??"-"}×${it.dh??"-"} (${hz.date})`:""].filter(Boolean);const open=openIssues(it);
   const approved=st?st.status!=="revise":false,revise=st&&st.status==="revise";
   return `<div class="a3 sap">
   <header class="sap-h"><img src="${LOGO_URI}" alt="CHAMPACA" class="sap-logo"><div class="sap-hr"><b>${esc(p.name)}</b><span>SALES APPROVAL · Version ${p.version}</span></div></header>
@@ -7641,7 +7670,7 @@ function sapReferencePaper(p,it,idx,total){
   if(it.scheduleImage)cards.push(`<figure><figcaption>ตารางประตู / DOOR SCHEDULE</figcaption>${savedScheduleHTML(it)}</figure>`);
   if(photo)cards.push(`<figure><figcaption>รูปเปรียบเทียบช่องเปิด / OPENING · TRUE SCALE</figcaption><div class="sap-evidence-image" data-reference-opening>${compareSVG(it)}</div><div class="sap-leg"><span class="lg dash"></span> ตามแบบ <span class="lg solid"></span> วัดจริง <span class="lg red"></span> แบบเดิม · พื้นสี = บาน</div></figure>`);
   if(!cards.length)return "";
-  return `<div class="a3 sap sap-evidence"><header class="sap-h"><img src="${LOGO_URI}" alt="CHAMPACA" class="sap-logo"><div class="sap-hr"><b>${esc(p.name)}</b><span>REFERENCE · Version ${p.version}</span></div></header><div class="sap-title"><b>${esc(it.code)}</b><span>|</span>เอกสารอ้างอิงประกอบแบบอนุมัติ</div><p class="sap-sub">ภาพต้นฉบับและรูปเปรียบเทียบช่องเปิดใช้ประกอบการตรวจสอบ · ขนาดและทิศเปิดดูหน้าช่องปูน / รูปบาน / รูปด้านข้าง</p><div class="sap-evidence-grid" style="--evidence-cols:${cards.length}">${cards.join("")}</div><div class="sap-evidence-material">${drawingMaterialHTML(it)}</div><footer class="sap-f"><span>REFERENCE ONLY · หน้านี้ไม่มีผลแทนแบบอนุมัติที่ลงนาม</span><span>Ver.${p.version} | ${idx+1} / ${total}</span></footer></div>`;
+  return `<div class="a3 sap sap-evidence"><header class="sap-h"><img src="${LOGO_URI}" alt="CHAMPACA" class="sap-logo"><div class="sap-hr"><b>${esc(p.name)}</b><span>REFERENCE · Version ${p.version}</span></div></header><div class="sap-title"><b>${esc(it.code)}</b><span>|</span>เอกสารอ้างอิงประกอบแบบอนุมัติ</div><div class="sap-reference-details" data-reference-details><div><span>รหัสประตู / หน้าต่าง</span><b>${esc(it.code||'ไม่ระบุ')}</b></div><div><span>ห้อง / ตำแหน่ง</span><b>${esc(it.location||'ไม่ระบุ')}</b></div><div><span>ชั้น</span><b>${esc(it.storey||'ไม่ระบุ')}</b></div></div><p class="sap-sub">ภาพต้นฉบับและรูปเปรียบเทียบช่องเปิดใช้ประกอบการตรวจสอบ · ขนาดและทิศเปิดดูหน้าช่องปูน / รูปบาน / รูปด้านข้าง</p><div class="sap-evidence-grid" style="--evidence-cols:${cards.length}">${cards.join("")}</div><div class="sap-evidence-material">${drawingMaterialHTML(it)}</div><footer class="sap-f"><span>REFERENCE ONLY · หน้านี้ไม่มีผลแทนแบบอนุมัติที่ลงนาม</span><span>Ver.${p.version} | ${idx+1} / ${total}</span></footer></div>`;
 }
 function sapAll(p){
   docsReadyProject(p);const pages=[];
@@ -7871,10 +7900,39 @@ function a3Paper(p,it,idx,total,opt={}){
   <div class="note">${!opt.detail&&openIssues(it).length?`<span style="color:#B4531F">*${esc(releaseText(it))} · ดูหน้าถัดไป ${openIssues(it).length} ข้อ</span><br>`:""}**หมายเหตุ** หากมีการแก้ไขแบบ หรือแบบผิดพลาด กรุณาแจ้งฝ่ายแบบทันที${p.isSample?" · เอกสารตัวอย่าง":""}</div>
   </div>`;
 }
-function mountDocs(){const p=docsReadyProject(cur());const host=$("#paperHost");if(!host)return;host.innerHTML=S.docTab==="split"||S.docTab==="lump"?quotePages(p,S.docTab).html:S.docTab==="sap"?sapAll(p):a3All(p)}
+function mountDocs(){const p=docsReadyProject(cur());const host=$("#paperHost");if(!host)return;host.innerHTML=S.docTab==="split"||S.docTab==="lump"?quotePages(p,S.docTab).html:S.docTab==="sap"?sapAll(p):a3All(p);
+  S.overlaps=0;S.ovlAck=false;if(S.docTab==="sap"||S.docTab==="draw"){const run=()=>{try{S.overlaps=fixOverlaps(host)}catch(e){}};requestAnimationFrame(run);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run)}}
+/* ---- กันตัวเลขทับ: เลื่อนตัวเลขบอกขนาดไปตามแนวเส้นของตัวเอง แล้วรายงานจุดที่ยังทับ ---- */
+function fixOverlaps(host){
+  let total=0;
+  host.querySelectorAll(".a3").forEach(sheet=>{
+    sheet.querySelectorAll(".ovl-warn").forEach(x=>x.remove());
+    let bad=0;
+    sheet.querySelectorAll("svg").forEach(svg=>{
+      const texts=[...svg.querySelectorAll("text")].filter(t=>(t.textContent||"").trim());
+      texts.forEach(t=>t.classList.remove("ovl"));
+      const R=t=>t.getBoundingClientRect();
+      const hit=(a,b)=>a.left<b.right-1&&b.left<a.right-1&&a.top<b.bottom-2.5&&b.top<a.bottom-2.5;
+      const clash=t=>{const r=R(t);if(!r.width)return false;return texts.some(o=>o!==t&&hit(r,R(o)))};
+      const place=(t,x,y,v)=>{t.setAttribute("x",x.toFixed(1));t.setAttribute("y",y.toFixed(1));if(v)t.setAttribute("transform",`rotate(-90 ${x.toFixed(1)} ${y.toFixed(1)})`)};
+      for(let pass=0;pass<2;pass++)texts.forEach(t=>{
+        if(!t.dataset.dim||!clash(t))return;
+        const [kind,a1,a2]=t.dataset.dim.split(":");const A=+a1,Bn=+a2;const L=t.getBBox().width;const x0=+t.getAttribute("x"),y0=+t.getAttribute("y");const v=kind==="v";
+        const along=v?[(A+Bn)/2,A+L/2+3,Bn-L/2-3,A-L/2-8,Bn+L/2+8]:[(A+Bn)/2,A+L/2+3,Bn-L/2-3,Bn+L/2+8,A-L/2-8];
+        for(const m of along){if(v)place(t,x0,m,true);else place(t,m,y0,false);if(!clash(t))return}
+        place(t,x0,y0,v);
+      });
+      texts.forEach(t=>{if(clash(t)){t.classList.add("ovl");bad++}});
+    });
+    bad=Math.ceil(bad/2);total+=bad;
+    if(bad){const w=document.createElement("div");w.className="ovl-warn";w.setAttribute("data-html2canvas-ignore","true");w.textContent=`⚠ ตัวเลขทับกัน ${bad} จุด — ตรวจและแก้ก่อนส่งลูกค้าอนุมัติ`;sheet.appendChild(w)}
+  });
+  return total;
+}
 
 /* ---------- signature ---------- */
 function openSign(){
+  if(S.overlaps>0&&!S.ovlAck){S.ovlAck=true;toast(`พบตัวเลขทับกัน ${S.overlaps} จุดในแบบ (ขึ้นสีแดง) แนะนำให้แก้ก่อน · กดอีกครั้งถ้าต้องการเปิดหน้าเซ็นต่อ`);return}
   const p=cur();S.sig={name:p.approval&&p.approval.version===p.version?p.approval.name:"",items:{},drawn:false};
   p.items.forEach(it=>S.sig.items[it.id]={status:"approve",note:""});
   $("#modalHost").innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-label="ลูกค้าเซ็นอนุมัติ"><div class="scrim" data-act="closeSign"></div><div class="box">
@@ -9211,6 +9269,42 @@ function kbPicker(p){
    <select id="kb-arch" data-kbarch><option value="">ไม่ระบุ · ให้ AI ดูจากกรอบชื่อแบบ</option>${(KB.arch||[]).filter(x=>x.active||x.id===cur).map(x=>`<option value="${x.id}" ${x.id===cur?"selected":""}>${esc(kbArchLabel(x))}</option>`).join("")}</select></label>
    ${a&&p.architectAuto?`<p class="small muted" style="margin:4px 0 0">ระบบตรวจพบจากกรอบชื่อแบบ · เปลี่ยนได้</p>`:""}`;
 }
+/* ---- ให้ AI เรียนจากการแก้ของทีม: ตัวอย่างที่คนตรวจแล้ว (ไม่ต้องปักหมุด) ส่งไปกับทุกการอ่านแบบ ---- */
+async function reviewedExamplesText(archId){
+  try{
+    if(!SB.client||!SB.user)return "";
+    const q=SB.client.from("ai_training_examples").select("code,original_ai,corrected,architect_id,source,created_at").eq("active",true).in("source",["human_review","auto_review","auto_diff"]).order("created_at",{ascending:false}).limit(40);
+    const res=await Promise.race([q,new Promise(r=>setTimeout(()=>r({data:[]}),5000))]);
+    const K=["code","location","storey","type","leaves","qty","width_mm","height_mm","pattern"];
+    const pick=o=>Object.fromEntries(K.filter(k=>o&&o[k]!=null&&o[k]!=="").map(k=>[k,o[k]]));
+    const seen=new Set(),out=[];
+    for(const x of res.data||[]){
+      if(x.architect_id&&archId&&x.architect_id!==archId)continue;
+      const ai=pick(x.original_ai),ok=pick(x.corrected);/* ช่องที่ทีมลบทิ้ง = ยังไม่ทราบ ไม่ใช่คำตอบที่ถูก จึงไม่สอน */const diff=K.filter(k=>ok[k]!=null&&String(ai[k]??"")!==String(ok[k]??""));
+      if(!diff.length)continue;const key=sizeKey(x.code)+"|"+diff.join(",")+"|"+JSON.stringify(diff.map(k=>ok[k]));
+      if(seen.has(key))continue;seen.add(key);out.push({ai,correct:ok,changed:diff});if(out.length>=8)break;
+    }
+    if(!out.length)return "";
+    return `\n\nตัวอย่างที่ทีมงานตรวจแก้ล่าสุด (${out.length} ตัวอย่าง · "ai" = ที่ AI เคยอ่าน, "correct" = ค่าที่ทีมยืนยัน, "changed" = ช่องที่ผิด) ใช้เรียนรู้รูปแบบความผิดพลาด ห้ามคัดลอกค่าไปใช้กับแบบนี้ ถ้าขัดกับ Legend หรือ Schedule ของโครงการให้ยึดแบบโครงการ:\n${JSON.stringify(out)}`;
+  }catch(e){return ""}
+}
+/* ---- เติมขนาดที่ AI ไม่เห็น จากรหัสเดียวกันใน Door Schedule (รายการอื่นในการอ่านครั้งนี้) หรือขนาดที่ทีมยืนยันไว้ในโครงการ ---- */
+function sizeKey(c){return String(c||"").toUpperCase().replace(/\s/g,"").replace(/^([^\d]+?)[.-]+(?=\d)/,"$1").replace(/^([^\d]+?)0+(?=\d)/,"$1").replace(/(\d)[LR]$/,"$1")}
+function fillSizesFromKnown(items,p){
+  const has=r=>r&&r.dw!=null&&r.dh!=null&&r.dw>0&&r.dh>0;
+  const fromRead=new Map(),fromProject=new Map();
+  items.forEach(r=>{const k=sizeKey(r.code);if(k&&!r.untagged&&has(r)&&!fromRead.has(k))fromRead.set(k,r)});
+  ((p&&p.items)||[]).forEach(r=>{const k=sizeKey(r.code);if(k&&has(r)&&!fromProject.has(k))fromProject.set(k,r)});
+  let n=0;
+  items.forEach(r=>{
+    if(has(r)||r.untagged)return;const k=sizeKey(r.code);if(!k)return;
+    const s=fromRead.get(k),q=fromProject.get(k);const src=s?{from:"schedule",row:s}:q?{from:"project",row:q}:null;if(!src)return;
+    if(r.dw==null)r.dw=src.row.dw;if(r.dh==null)r.dh=src.row.dh;if(!r.dimFrom&&src.row.dimFrom)r.dimFrom=src.row.dimFrom;
+    r.sizeFrom={from:src.from,code:src.row.code};n++;
+    r.notes=[r.notes,src.from==="schedule"?`ขนาดเติมจาก Door Schedule รหัส ${src.row.code} — ยืนยันก่อนผลิต`:`ขนาดเติมจากรายการที่ยืนยันแล้วในโครงการ (${src.row.code}) — ยืนยันก่อนผลิต`].filter(Boolean).join(" · ");
+  });
+  return n;
+}
 /* record how much the reviewer had to change the AI output */
 function kbRecordEval(staged,rows){
   if(!kbOn()||!staged||!staged.items)return;
@@ -9220,7 +9314,7 @@ function kbRecordEval(staged,rows){
     if(k(o.code)!==k(r.code))code++;
     if((num(o.width_mm)??null)!==(r.dw??null)||(num(o.height_mm)??null)!==(r.dh??null))size++;
     if(k(o.location)!==k(r.location))room++});
-  const row={architect_id:staged.architectId||p.architectId||null,job_id:staged.jobId||null,project_id:p.id,ai_count:staged.items.length,accepted_count:on.length,code_changed:code,size_changed:size,room_changed:room,added_by_human:added,metrics:{metric_scope:"accepted_rows_only",job_ids:staged.jobIds||[],rejected:staged.items.length-on.length,estimated:on.filter(r=>r.est).length},user_id:SB.user.id};
+  const row={architect_id:staged.architectId||p.architectId||null,job_id:staged.jobId||null,project_id:p.id,ai_count:staged.items.length,accepted_count:on.length,code_changed:code,size_changed:size,room_changed:room,added_by_human:added,metrics:{metric_scope:"accepted_rows_only",job_ids:staged.jobIds||[],rejected:staged.items.length-on.length,estimated:on.filter(r=>r.est).length,size_filled:on.filter(r=>r.sizeFrom).length,no_size:on.filter(r=>r.dw==null||r.dh==null).length,duplicate_codes:on.length-new Set(on.map(r=>sizeKey(r.code))).size},user_id:SB.user.id};
   SB.client.from("ai_eval").insert(row).then(({error})=>{if(error)console.warn("ai_eval:",error.message);KB.rules=null});
 }
 /* Every imported row the reviewer corrected becomes a training example, so learning does not depend on someone
@@ -9245,6 +9339,9 @@ async function kbLoadAll(){
       SB.client.from("ai_jobs").select("architect_id,status,total_tokens,created_at,action").eq("action","drawing").order("created_at",{ascending:false}).limit(2000)]);
     const bad=[r,e,v,j].find(x=>x.error);if(bad)KB.err=bad.error.message;
     KB.rules=r.data||[];KB.ex=e.data||[];KB.evals=v.data||[];KB.jobs=j.data||[];
+    // KPI views (migration ai_accuracy_loop_v1); a missing view just hides the section
+    const [w,bl]=await Promise.all([SB.client.from("ai_accuracy_weekly").select("*").limit(26),SB.client.from("ai_review_backlog").select("*").order("created_at",{ascending:false}).limit(50)]);
+    KB.weekly=w.error?null:(w.data||[]);KB.backlog=bl.error?null:(bl.data||[]);
   }catch(err){KB.err=String(err.message||err)}
   KB.busy=false;if(S.step==="settings")render();
 }
@@ -9297,12 +9394,27 @@ function kbAccTab(){
       added:E.reduce((s,x)=>s+x.added_by_human,0),ex:KB.ex.filter(x=>(x.architect_id||null)===g.id&&x.active).length}}).filter(r=>r.jobs||r.reviews||r.g.id);
   const P=v=>v==null?"–":`<b style="color:${v>=.95?"var(--ok)":v>=.8?"inherit":"var(--bad)"}">${Math.round(v*100)}%</b>`;
   const months={};KB.evals.forEach(x=>{const m=x.created_at.slice(0,7);const o=months[m]=months[m]||{acc:0,code:0,size:0,n:0};o.acc+=x.accepted_count;o.code+=x.code_changed;o.size+=x.size_changed;o.n++});
-  return `<p class="small muted" style="margin-top:0">สัดส่วนรายการที่นำเข้าโดยไม่แก้ช่องนั้น · ไม่ใช่ความแม่นยำทั้งแบบ และยังไม่วัดช่องเปิดที่ AI อ่านตก · ต้องเทียบกับเฉลยที่คนตรวจครบทุกตำแหน่ง</p>
+  return kbKpiBlock()+`<p class="small muted" style="margin-top:0">สัดส่วนรายการที่นำเข้าโดยไม่แก้ช่องนั้น · ไม่ใช่ความแม่นยำทั้งแบบ และยังไม่วัดช่องเปิดที่ AI อ่านตก · ต้องเทียบกับเฉลยที่คนตรวจครบทุกตำแหน่ง</p>
    <div class="tbl-wrap"><table><thead><tr><th>สถาปนิก</th><th class="num">อ่านแบบ (สำเร็จ)</th><th class="num">ตรวจแล้ว</th><th class="num">รายการ AI</th><th class="num">นำเข้า</th><th class="num">รหัสถูก</th><th class="num">ขนาดถูก</th><th class="num">ห้องถูก</th><th class="num">คนเพิ่มเอง</th><th class="num">ตัวอย่าง</th><th class="num">Tokens</th></tr></thead><tbody>
    ${rows.map(r=>`<tr><td>${esc(r.g.name)}</td><td class="num">${r.jobs} (${r.ok})</td><td class="num">${r.reviews}</td><td class="num">${r.ai}</td><td class="num">${r.acc} <span class="small muted">${pct(r.acc,r.ai)}</span></td><td class="num">${P(r.code)}</td><td class="num">${P(r.size)}</td><td class="num">${P(r.room)}</td><td class="num">${r.added}</td><td class="num">${r.ex}</td><td class="num">${fmt0(r.tok)}</td></tr>`).join("")||`<tr><td colspan="11" class="muted">ยังไม่มีข้อมูล</td></tr>`}
    </tbody></table></div>
    ${Object.keys(months).length?`<div style="margin-top:12px"><span class="eyebrow">แนวโน้มรายเดือน (ทุกสำนักงาน)</span><div class="tbl-wrap"><table><thead><tr><th>เดือน</th><th class="num">ครั้งที่ตรวจ</th><th class="num">รายการนำเข้า</th><th class="num">รหัสถูก</th><th class="num">ขนาดถูก</th></tr></thead><tbody>
    ${Object.entries(months).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,12).map(([m,o])=>`<tr><td class="mono">${m}</td><td class="num">${o.n}</td><td class="num">${o.acc}</td><td class="num">${P(o.acc?1-o.code/o.acc:null)}</td><td class="num">${P(o.acc?1-o.size/o.acc:null)}</td></tr>`).join("")}</tbody></table></div></div>`:""}`;
+}
+/* KPI รายสัปดาห์ + งานที่ยังไม่มีคนยืนยัน — เป้าหมายตามแผนพัฒนา AI อ่านแบบ */
+const KPI_TARGET=[["pct_accepted","รับได้",90,"min"],["pct_size_changed","แก้ขนาด",5,"max"],["pct_no_size","ไม่มีขนาด",15,"max"],["pct_duplicate","อ่านซ้ำ",5,"max"]];
+function kbKpiBlock(){
+  if(!KB.weekly&&!KB.backlog)return "";
+  const W=(KB.weekly||[]).filter(x=>x.items||x.reviews);
+  const cell=(v,t,dir)=>v==null?`<td class="num muted">–</td>`:`<td class="num"><b style="color:${(dir==="min"?v>=t:v<=t)?"var(--ok)":"var(--bad)"}">${v}%</b></td>`;
+  const bl=KB.backlog||[];
+  return `<div class="card" style="padding:14px;margin-bottom:14px"><span class="eyebrow">KPI รายสัปดาห์ · เป้าหมาย: รับได้ ≥90% · แก้ขนาด ≤5% · ไม่มีขนาด ≤15% · อ่านซ้ำ ≤5%</span>
+   <div class="tbl-wrap" style="margin-top:6px"><table><thead><tr><th>สัปดาห์</th><th>เวอร์ชัน</th><th class="num">งาน</th><th class="num">ตรวจแล้ว</th>${KPI_TARGET.map(k=>`<th class="num">${k[1]}</th>`).join("")}<th class="num">เติมขนาดจาก Schedule</th><th class="num">Tokens/งาน</th><th class="num">วินาที/งาน</th></tr></thead><tbody>
+   ${W.map(x=>`<tr><td class="mono">${esc(String(x.week))}</td><td class="small">${esc(x.prompt_version||"–")}</td><td class="num">${x.jobs??"–"}</td><td class="num">${x.reviews??0}</td>${KPI_TARGET.map(k=>cell(x[k[0]]==null?null:Number(x[k[0]]),k[2],k[3])).join("")}<td class="num">${x.pct_size_filled==null?"–":x.pct_size_filled+"%"}</td><td class="num">${x.avg_tokens==null?"–":fmt0(Number(x.avg_tokens))}</td><td class="num">${x.avg_seconds??"–"}</td></tr>`).join("")||`<tr><td colspan="11" class="muted">ยังไม่มีข้อมูล</td></tr>`}
+   </tbody></table></div>
+   <p class="small" style="margin:10px 0 4px"><b>งานอ่านแบบที่ยังไม่มีคนยืนยันผล: ${bl.length}${bl.length>=50?"+":""} งาน</b> · ตัวเลขความแม่นยำจะเชื่อได้เมื่อทุกงานถูกตรวจและกดนำเข้า</p>
+   ${bl.length?`<div class="tbl-wrap"><table><thead><tr><th>วันที่</th><th>โครงการ</th><th>ผู้อ่าน</th><th class="num">รายการ</th><th>เวอร์ชัน</th></tr></thead><tbody>${bl.slice(0,10).map(x=>`<tr><td class="mono small">${esc(String(x.created_at).slice(0,10))}</td><td>${esc(x.project_name||x.project_id||"–")}</td><td class="small">${esc(x.email||"–")}</td><td class="num">${x.items}</td><td class="small">${esc(x.prompt_version||"")}</td></tr>`).join("")}</tbody></table></div>`:""}
+  </div>`;
 }
 async function kbAct(act,id,el){
   const c=SB.client;const done=(r,msg)=>{if(r&&r.error){toast("ไม่สำเร็จ: "+r.error.message);return false}if(msg)toast(msg);return true};
